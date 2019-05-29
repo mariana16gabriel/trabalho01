@@ -43,8 +43,8 @@ O projeto Hydro Economizer precisa inicialmente dos seguintes relatórios:
 
 
 #### 4.2 TABELA DE DADOS DO SISTEMA:
-[Exemplo de Tabela de dados do Hydro Economizer](https://github.com/discipint/trabalho01/blob/master/arquivos/TabelaEmpresaDevCom_sample.xlsx?raw=true "Tabela - Empresa Devcom")
-
+[Exemplo de Tabela de dados do Hydro Economizer]
+https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
 
 ### 5.MODELO CONCEITUAL<br>
     A) NOTACAO ENTIDADE RELACIONAMENTO 
