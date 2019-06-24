@@ -47,8 +47,7 @@ O projeto Hydro Economizer precisa inicialmente dos seguintes relatórios:
 https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
 
 ### 5.MODELO CONCEITUAL<br>
-    
-    ![Alt text].https://github.com/mariana16gabriel/trabalho01/blob/master/conceitual_print.pngraw=true "Title")
+    https://github.com/mariana16gabriel/trabalho01/blob/master/conceitual_print.png
     
         
     
