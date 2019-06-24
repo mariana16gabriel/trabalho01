@@ -17,7 +17,7 @@ Este documento contém a especificação do projeto do banco de dados Hydro Econ
 
 ### 3.MINI-MUNDO Novo<br>
 
->O Hydro-Economizer armazenará em cada cadastro o nome do proprietário de uma residência, seu CPF, o endereço de tal residência e o número de moradores da residência. Ele também armazena o consumo de água de cada residência, mostrando o CEP da residência, o número de cômodos e o consumo de água atualizado diariamente (tal dado é obtido através de sensores implantados na tubulação. Por fim, o sistema mostra o consumo mensal, mostrando o CEP da residência, o consumo total da casa, o consumo por residente médio, o consumo por cômodo médio, e mostra o nível do consumo (“Econômico”, “Bom”, “Normal”, “Excessivo”, “Muito Exagerado”).
+>O Hydro-Economizer armazenará em cada cadastro o nome do proprietário de uma residência, seu CPF, o endereço de tal residência e o número de moradores da residência. Ele também armazena o consumo de água de cada residência, mostrando o CEP da residência, o número de cômodos e o consumo de água atualizado diariamente (tal dado é obtido através de sensores implantados na tubulação. O sistema armazena as informações dos sensores utilizados, mostrando seu número identificador (ID), cômodo em que o sensor se localiza e o tipo de sensor (sensor de tubulação de água, sensores de portas, etc). Por fim, o sistema mostra o consumo mensal, mostrando o CEP da residência, o consumo total da casa, o consumo por residente médio, o consumo por cômodo médio, e mostra o nível do consumo (“Econômico”, “Bom”, “Normal”, “Excessivo”, “Muito Exagerado”).
 
 ### 4.RASCUNHOS BÁSICOS DA INTERFACE (MOCKUPS)<br>
 Neste ponto a codificação não e necessária, somente as ideias de telas devem ser desenvolvidas. O princípio aqui é pensar na criação da interface para identificar possíveis informações a serem armazenadas e/ou descartadas <br>
@@ -48,7 +48,7 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
 
 ### 5.MODELO CONCEITUAL<br>
     
-    https://github.com/mariana16gabriel/trabalho01/blob/master/modelo_conceitual.png
+    ![Alt text].(https://github.com/mariana16gabriel/trabalho01/blob/master/modelo_conceitual.png?raw=true "Title")
     
         
     
