@@ -57,27 +57,41 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
     
 #### 5.2 DESCRIÇÃO DOS DADOS 
 
-    Cadastro: tabela que armazena as informações relativas ao cliente. </br>
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada proprietário </br>
-    Nome do proprietário: campo que armazena o nome do proprietário da casa.</br> 
-    Endereço: campo que armazena o endereço de cada moradia.</br>
-    N° de moradores: campo que armazena a quantidade de moradores da casa.</br>
-    </br>
-    Relatório mensal: tabela que armazena relatórios contendo as informações relativas ao consumo mensal.</br>
-    Relatório médio mensal: campo que armazena a média de consumo por mês, ou seja, divisão da soma entre os consumos diários pela quantidade de dias.</br>
-    Consumo total: campo que armazena o consumo total mensal em litros.</br>
-    Nível de consumo: campo que armazena a característa do consumo. Ex: elevado, baixo, etc.</br>
-    Data: campo que armazena a data de emissão do relatório mensal.<br>
-    </br>
-    Consumo_diário: tabela que armazena relatório contendo as informações do consumo diário.</br>
-    N° de cômodos: campo que armazena a quantidade de cômodos por moradida.</br>
-    Consumo: campo que armazena a quantidade em litros do consumo diário. </br>
-    Data: campo que armazena a data de emissão do relatório diário. </br>
-    </br>
-    Sensores: tabela que armazena as informações relacionadas aos sensores utilizados no sistema. <br>
-    ID: campo que armazena o número de identificação de cada sensor.</br>
-    Local: campo que armazena o cômodo da residência em que o sensor está localizado.</br>
-    Tipo de sensor: campo que armazena o tipo de sensor, ou seja, se ele é um sensor de tubulação, de porta, etc. </br>
+    Cadastro: tabela que armazena as informações relativas ao cliente.
+    
+    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada proprietário.
+    
+    Nome do proprietário: campo que armazena o nome do proprietário da casa.
+    
+    Endereço: campo que armazena o endereço de cada moradia.
+    
+    N° de moradores: campo que armazena a quantidade de moradores da casa.
+    
+    Relatório mensal: tabela que armazena relatórios contendo as informações relativas ao consumo mensal.
+    
+    Relatório médio mensal: campo que armazena a média de consumo por mês, ou seja, divisão da soma entre os consumos diários pela quantidade de dias.
+    
+    Consumo total: campo que armazena o consumo total mensal em litros.
+    
+    Nível de consumo: campo que armazena a característa do consumo. Ex: elevado, baixo, etc.
+    
+    Data: campo que armazena a data de emissão do relatório mensal.
+    
+    Consumo_diário: tabela que armazena relatório contendo as informações do consumo diário.
+    
+    N° de cômodos: campo que armazena a quantidade de cômodos por moradida.
+    
+    Consumo: campo que armazena a quantidade em litros do consumo diário.
+    
+    Data: campo que armazena a data de emissão do relatório diário. 
+    
+    
+    Sensores: tabela que armazena as informações relacionadas aos sensores utilizados no sistema.
+    
+    ID: campo que armazena o número de identificação de cada sensor.
+    Local: campo que armazena o cômodo da residência em que o sensor está localizado.
+    
+    Tipo de sensor: campo que armazena o tipo de sensor, ou seja, se ele é um sensor de tubulação, de porta, etc.
     
     
 
