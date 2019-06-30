@@ -86,56 +86,56 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
 
 ### 7	MODELO FÍSICO<br>
 
-CREATE TABLE USUARIO (
-    codigo integer PRIMARY KEY,
-    nome varchar(50),
-    cpf integer
-);
+         CREATE TABLE USUARIO (
+             codigo integer PRIMARY KEY,
+             nome varchar(50),
+             cpf integer
+         );
 
-CREATE TABLE RESIDENCIA (
-    codigo integer PRIMARY KEY,
-    endereco varchar(100),
-    numero_comodos integer
-);
+         CREATE TABLE RESIDENCIA (
+             codigo integer PRIMARY KEY,
+             endereco varchar(100),
+             numero_comodos integer
+         );
 
-CREATE TABLE SENSOR (
-    codigo integer PRIMARY KEY,
-    tipo_sensor varchar(30),
-    local_da_casa varchar(20),
-    FK_RESIDENCIA_codigo integer
-);
+         CREATE TABLE SENSOR (
+             codigo integer PRIMARY KEY,
+             tipo_sensor varchar(30),
+             local_da_casa varchar(20),
+             FK_RESIDENCIA_codigo integer
+         );
 
-CREATE TABLE DADO (
-    valor float,
-    data_hora timestamp,
-    codigo integer PRIMARY KEY,
-    FK_SENSOR_codigo integer
-);
+         CREATE TABLE DADO (
+             valor float,
+             data_hora timestamp,
+             codigo integer PRIMARY KEY,
+             FK_SENSOR_codigo integer
+         );
 
-CREATE TABLE Usuario_residencia (
-    fk_USUARIO_codigo integer,
-    fk_RESIDENCIA_codigo integer
-);
- 
-ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
-    FOREIGN KEY (FK_RESIDENCIA_codigo)
-    REFERENCES RESIDENCIA (codigo)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE DADO ADD CONSTRAINT FK_DADO_2
-    FOREIGN KEY (FK_SENSOR_codigo)
-    REFERENCES SENSOR (codigo)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE Possui ADD CONSTRAINT FK_Possui_1
-    FOREIGN KEY (fk_USUARIO_codigo)
-    REFERENCES USUARIO (codigo)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE Possui ADD CONSTRAINT FK_Possui_2
-    FOREIGN KEY (fk_RESIDENCIA_codigo)
-    REFERENCES RESIDENCIA (codigo)
-    ON DELETE RESTRICT;         
+         CREATE TABLE Usuario_residencia (
+             fk_USUARIO_codigo integer,
+             fk_RESIDENCIA_codigo integer
+         );
+
+         ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
+             FOREIGN KEY (FK_RESIDENCIA_codigo)
+             REFERENCES RESIDENCIA (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE DADO ADD CONSTRAINT FK_DADO_2
+             FOREIGN KEY (FK_SENSOR_codigo)
+             REFERENCES SENSOR (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE Possui ADD CONSTRAINT FK_Possui_1
+             FOREIGN KEY (fk_USUARIO_codigo)
+             REFERENCES USUARIO (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE Possui ADD CONSTRAINT FK_Possui_2
+             FOREIGN KEY (fk_RESIDENCIA_codigo)
+             REFERENCES RESIDENCIA (codigo)
+             ON DELETE RESTRICT;         
 
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
 #### 8.1 DETALHAMENTO DAS INFORMAÇÕES
