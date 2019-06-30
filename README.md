@@ -81,7 +81,7 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
     
 
 ### 6	MODELO LÓGICO<br>
-    (https://github.com/mariana16gabriel/trabalho01/blob/master/logico.png?raw="true" "little")    
+    (https://github.com/mariana16gabriel/trabalho01/blob/master/logico.png)   
         
 
 ### 7	MODELO FÍSICO<br>
