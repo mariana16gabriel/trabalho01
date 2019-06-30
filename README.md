@@ -46,9 +46,6 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
 
 ### 5.MODELO CONCEITUAL<br>
    ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/conceitual_print.png?raw="true" "little")
-    
-        
-    
 #### 5.1 Validação do Modelo Conceitual
     Grupo01: Caio Lessa e Lucas Tejada
     Grupo02: Beatriz Auer e Júlia Suzano
@@ -81,8 +78,8 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/Mariana_Gabriel.ods
     
 
 ### 6	MODELO LÓGICO<br>
-    ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/logico.png?raw="true" "little")   
-        
+   ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/logico.png?raw="true" "little")
+    
 
 ### 7	MODELO FÍSICO<br>
 
