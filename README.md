@@ -17,7 +17,7 @@ Este documento contém a especificação do projeto do banco de dados Hydro Econ
 
 ### 3.MINI-MUNDO Novo<br>
 
->O Hydro-Economizer armazenará em cada cadastro o nome do proprietário de uma residência, seu CPF, o endereço de tal residência e o número de moradores da residência. Ele também armazena o consumo de água de cada residência, mostrando a data, o número de cômodos e o consumo de água atualizado diariamente (tal dado é obtido através de sensores implantados na tubulação. O sistema armazena as informações dos sensores utilizados, mostrando seu número identificador (ID), cômodo em que o sensor se localiza e o tipo de sensor (sensor de tubulação de água, sensores de portas, etc). Por fim, o sistema mostra o consumo mensal, mostrando a data, o consumo total da casa, o consumo por residente médio, o consumo por cômodo médio, e mostra o nível do consumo (“Econômico”, “Bom”, “Normal”, “Excessivo”, “Muito Exagerado”).
+>O Hydro-Economizer armazenará o nome do usuário e o seu cpf. Para cadastrar a residência, será armazenado o endereço do usuário e o número de cômodos. Através de sensores implementados na tubulação, serão captadas as informações do consumo, como o instante da captura e a quantidade, em litros. Os sensores são identificados de acordo com seu tipo, cômodo que se encontra e por um código de identificação.
 
 ### 4.RASCUNHOS BÁSICOS DA INTERFACE (MOCKUPS)<br>
 
