@@ -315,7 +315,7 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
          
          DROP TABLE DADO;
          
-         DROP TABLE Usuario_residencia
+         DROP TABLE Usuario_residencia;
          
          CREATE TABLE USUARIO (
              codigo integer PRIMARY KEY,
