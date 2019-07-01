@@ -81,7 +81,7 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
          CREATE TABLE USUARIO (
              codigo integer PRIMARY KEY,
              nome varchar(50),
-             cpf integer
+             cpf bigint
          );
 
          CREATE TABLE RESIDENCIA (
@@ -119,12 +119,12 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
              REFERENCES SENSOR (codigo)
              ON DELETE RESTRICT;
 
-         ALTER TABLE Possui ADD CONSTRAINT FK_Possui_1
+         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_1
              FOREIGN KEY (fk_USUARIO_codigo)
              REFERENCES USUARIO (codigo)
              ON DELETE RESTRICT;
 
-         ALTER TABLE Possui ADD CONSTRAINT FK_Possui_2
+         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_2
              FOREIGN KEY (fk_RESIDENCIA_codigo)
              REFERENCES RESIDENCIA (codigo)
              ON DELETE RESTRICT;         
@@ -192,17 +192,241 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         (2566788, 1115489);
 
 #### 8.2 INCLUSÃO DO SCRIPT PARA CRIAÇÃO DE TABELA E INSERÇÃO DOS DADOS
-        a) Junção dos scripts anteriores em um único script 
-        (create para tabelas e estruturas de dados + dados a serem inseridos)
-        b) Criar um novo banco de dados para testar a restauracao 
-        (em caso de falha na restauração o grupo não pontuará neste quesito)
-        c) formato .SQL
+        
+        CREATE TABLE USUARIO (
+             codigo integer PRIMARY KEY,
+             nome varchar(50),
+             cpf bigint
+         );
+
+         CREATE TABLE RESIDENCIA (
+             codigo integer PRIMARY KEY,
+             endereco varchar(100),
+             numero_comodos integer
+         );
+
+         CREATE TABLE SENSOR (
+             codigo integer PRIMARY KEY,
+             tipo_sensor varchar(30),
+             local_da_casa varchar(20),
+             FK_RESIDENCIA_codigo integer
+         );
+
+         CREATE TABLE DADO (
+             valor float,
+             data_hora timestamp,
+             codigo integer PRIMARY KEY,
+             FK_SENSOR_codigo integer
+         );
+
+         CREATE TABLE Usuario_residencia (
+             fk_USUARIO_codigo integer,
+             fk_RESIDENCIA_codigo integer
+         );
+
+         ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
+             FOREIGN KEY (FK_RESIDENCIA_codigo)
+             REFERENCES RESIDENCIA (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE DADO ADD CONSTRAINT FK_DADO_2
+             FOREIGN KEY (FK_SENSOR_codigo)
+             REFERENCES SENSOR (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_1
+             FOREIGN KEY (fk_USUARIO_codigo)
+             REFERENCES USUARIO (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_2
+             FOREIGN KEY (fk_RESIDENCIA_codigo)
+             REFERENCES RESIDENCIA (codigo)
+             ON DELETE RESTRICT; 
+             
+        INSERT INTO RESIDENCIA (codigo, endereco, numero_comodos) VALUES 
+        (1264932, 'R. das Goiabas, 296 - qd-1 lt-14, Morada de Laranjeiras - Serra, ES', 10),
+        (2896907, 'Av Paulo Pereira Gomes, 803 - LJ 1, Morada de Laranjeiras - Serra, ES', 8), 
+        (9876544, 'R Joaquim Lírio, 753, Praia Canto - Vitória, ES', 7),
+        (1234567, 'R Cândido Portinari, 27 - lj-1, Santa Luíza - Vitória, ES', 11),
+        (1234561, 'R Fortunato Ramos, 30 - s-309, Santa Lúcia - Vitória, ES', 10),
+        (5467801, 'R Misael Pedreira da Silva, 48, Santa Lúcia - Vitória, ES', 6),
+        (1523799, 'R Henrique Laranja, 318, Centro - Vila Velha, ES', 15),
+        (9999999, 'Av Champagnat, 304 - s-101, Centro - Vila Velha, ES', 20),
+        (5554441, 'R José Ricardo, 210, Ibes - Vila Velha, ES', 12),
+        (1115489, 'R Carolina Leal, 107, Olaria - Vila Velha, ES', 8);
+
+        INSERT INTO SENSOR (codigo, tipo_sensor, local_da_casa, FK_RESIDENCIA_codigo) VALUES
+        (1462779, 'tubulação', 'lavabo', 1264932),
+        (9993451, 'tubulação', 'banheiro', 2896907),
+        (1114333, 'tubulação', 'quintal', 9876544),
+        (8830881, 'tubulação', 'cozinha', 1234567),
+        (1244565, 'tubulação', 'cozinha', 1234561),
+        (1166598, 'tubulação', 'lavabo', 5467801),
+        (2456702, 'tubulação', 'quintal', 1523799),
+        (4684225, 'tubulação', 'banheiro', 9999999),
+        (2253688, 'tubulação', 'banheiro', 5554441),
+        (1156855, 'tubulação', 'cozinha', 1115489);
+
+        INSERT INTO DADO (codigo, data_hora, valor, FK_SENSOR_codigo) VALUES
+        (1234567, '2019-04-02 00:00:00', 10, 1462779),
+        (7654321, '2019-04-01 13:20:00', 1, 9993451),
+        (9876545, '2018-12-19 15:20:00', 13, 1114333),
+        (3456789, '2017-06-01 01:00:00', 0.5, 8830881),
+        (5678901, '2019-09-01 07:45:00', 0.3, 1244565),
+        (8901209, '2019-04-14 08:13:00', 12, 1166598),
+        (4587129, '2016-05-30 12:32:00', 1, 2456702),
+        (8877554, '2015-10-27 16:07:00', 2, 4684225),
+        (4474799, '2019-11-17 06:00:00', 4, 2253688),
+        (1235467, '2018-09-14 20:10:00', 6.8, 1156855);
+
+        INSERT INTO USUARIO (codigo, nome, cpf) VALUES
+        (2345222, 'Mariana Tassan', 12345678910),	
+        (8709431, 'Gabriel Marinho', 23456789101),
+        (1254673, 'Augusto Silva', 34567891011),
+        (9908466, 'Juliana Nogueira', 45678910111),	
+        (1252705, 'Felipe Souza', 56789101112),
+        (4527869, 'Emanuel Andrade', 67891011121),	
+        (1574806, 'Suzana Pereira', 78910111213),	
+        (3368907, 'Marcos Ferraz', 89101112131),
+        (6774322, 'Priscila Pinto', 91011121314),	
+        (2566788, 'João Ferreira', 10111213141);	
+
+        INSERT INTO Usuario_residencia (fk_USUARIO_codigo, fk_RESIDENCIA_codigo) VALUES
+        (2345222, 1264932),
+        (8709431, 2896907),
+        (1254673, 9876544),
+        (9908466, 1234567),
+        (1252705, 1234561),
+        (4527869, 5467801),
+        (1574806, 1523799),
+        (3368907, 9999999),
+        (6774322, 5554441),
+        (2566788, 1115489);
+        
+        
 #### 8.3 INCLUSÃO DO SCRIPT PARA EXCLUSÃO DE TABELAS EXISTENTES, CRIAÇÃO DE TABELA NOVAS E INSERÇÃO DOS DADOS
-        a) Junção dos scripts anteriores em um único script 
-        (Drop table + Create de tabelas e estruturas de dados + dados a serem inseridos)
-        b) Criar um novo banco de dados para testar a restauracao 
-        (em caso de falha na restauração o grupo não pontuará neste quesito)
-        c) formato .SQL
+         
+         DROP TABLE USUARIO;
+         
+         DROP TABLE RESIDENCIA;
+         
+         DROP TABLE SENSOR;
+         
+         DROP TABLE DADO;
+         
+         DROP TABLE Usuario_residencia
+         
+         CREATE TABLE USUARIO (
+             codigo integer PRIMARY KEY,
+             nome varchar(50),
+             cpf bigint
+         );
+
+         CREATE TABLE RESIDENCIA (
+             codigo integer PRIMARY KEY,
+             endereco varchar(100),
+             numero_comodos integer
+         );
+
+         CREATE TABLE SENSOR (
+             codigo integer PRIMARY KEY,
+             tipo_sensor varchar(30),
+             local_da_casa varchar(20),
+             FK_RESIDENCIA_codigo integer
+         );
+
+         CREATE TABLE DADO (
+             valor float,
+             data_hora timestamp,
+             codigo integer PRIMARY KEY,
+             FK_SENSOR_codigo integer
+         );
+
+         CREATE TABLE Usuario_residencia (
+             fk_USUARIO_codigo integer,
+             fk_RESIDENCIA_codigo integer
+         );
+
+         ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
+             FOREIGN KEY (FK_RESIDENCIA_codigo)
+             REFERENCES RESIDENCIA (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE DADO ADD CONSTRAINT FK_DADO_2
+             FOREIGN KEY (FK_SENSOR_codigo)
+             REFERENCES SENSOR (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_1
+             FOREIGN KEY (fk_USUARIO_codigo)
+             REFERENCES USUARIO (codigo)
+             ON DELETE RESTRICT;
+
+         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_2
+             FOREIGN KEY (fk_RESIDENCIA_codigo)
+             REFERENCES RESIDENCIA (codigo)
+             ON DELETE RESTRICT; 
+             
+        INSERT INTO RESIDENCIA (codigo, endereco, numero_comodos) VALUES 
+        (1264932, 'R. das Goiabas, 296 - qd-1 lt-14, Morada de Laranjeiras - Serra, ES', 10),
+        (2896907, 'Av Paulo Pereira Gomes, 803 - LJ 1, Morada de Laranjeiras - Serra, ES', 8), 
+        (9876544, 'R Joaquim Lírio, 753, Praia Canto - Vitória, ES', 7),
+        (1234567, 'R Cândido Portinari, 27 - lj-1, Santa Luíza - Vitória, ES', 11),
+        (1234561, 'R Fortunato Ramos, 30 - s-309, Santa Lúcia - Vitória, ES', 10),
+        (5467801, 'R Misael Pedreira da Silva, 48, Santa Lúcia - Vitória, ES', 6),
+        (1523799, 'R Henrique Laranja, 318, Centro - Vila Velha, ES', 15),
+        (9999999, 'Av Champagnat, 304 - s-101, Centro - Vila Velha, ES', 20),
+        (5554441, 'R José Ricardo, 210, Ibes - Vila Velha, ES', 12),
+        (1115489, 'R Carolina Leal, 107, Olaria - Vila Velha, ES', 8);
+
+        INSERT INTO SENSOR (codigo, tipo_sensor, local_da_casa, FK_RESIDENCIA_codigo) VALUES
+        (1462779, 'tubulação', 'lavabo', 1264932),
+        (9993451, 'tubulação', 'banheiro', 2896907),
+        (1114333, 'tubulação', 'quintal', 9876544),
+        (8830881, 'tubulação', 'cozinha', 1234567),
+        (1244565, 'tubulação', 'cozinha', 1234561),
+        (1166598, 'tubulação', 'lavabo', 5467801),
+        (2456702, 'tubulação', 'quintal', 1523799),
+        (4684225, 'tubulação', 'banheiro', 9999999),
+        (2253688, 'tubulação', 'banheiro', 5554441),
+        (1156855, 'tubulação', 'cozinha', 1115489);
+
+        INSERT INTO DADO (codigo, data_hora, valor, FK_SENSOR_codigo) VALUES
+        (1234567, '2019-04-02 00:00:00', 10, 1462779),
+        (7654321, '2019-04-01 13:20:00', 1, 9993451),
+        (9876545, '2018-12-19 15:20:00', 13, 1114333),
+        (3456789, '2017-06-01 01:00:00', 0.5, 8830881),
+        (5678901, '2019-09-01 07:45:00', 0.3, 1244565),
+        (8901209, '2019-04-14 08:13:00', 12, 1166598),
+        (4587129, '2016-05-30 12:32:00', 1, 2456702),
+        (8877554, '2015-10-27 16:07:00', 2, 4684225),
+        (4474799, '2019-11-17 06:00:00', 4, 2253688),
+        (1235467, '2018-09-14 20:10:00', 6.8, 1156855);
+
+        INSERT INTO USUARIO (codigo, nome, cpf) VALUES
+        (2345222, 'Mariana Tassan', 12345678910),	
+        (8709431, 'Gabriel Marinho', 23456789101),
+        (1254673, 'Augusto Silva', 34567891011),
+        (9908466, 'Juliana Nogueira', 45678910111),	
+        (1252705, 'Felipe Souza', 56789101112),
+        (4527869, 'Emanuel Andrade', 67891011121),	
+        (1574806, 'Suzana Pereira', 78910111213),	
+        (3368907, 'Marcos Ferraz', 89101112131),
+        (6774322, 'Priscila Pinto', 91011121314),	
+        (2566788, 'João Ferreira', 10111213141);	
+
+        INSERT INTO Usuario_residencia (fk_USUARIO_codigo, fk_RESIDENCIA_codigo) VALUES
+        (2345222, 1264932),
+        (8709431, 2896907),
+        (1254673, 9876544),
+        (9908466, 1234567),
+        (1252705, 1234561),
+        (4527869, 5467801),
+        (1574806, 1523799),
+        (3368907, 9999999),
+        (6774322, 5554441),
+        (2566788, 1115489);
 
 ## Marco de Entrega 08 em: (29/05/2019)<br>
 
