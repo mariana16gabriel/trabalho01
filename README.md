@@ -12,7 +12,7 @@ Gabriel_Borges: gmarinho14@gmail.com<br>
 Este documento contém a especificação do projeto do banco de dados Hydro Economizer 
 <br>e motivação da escolha realizada. <br>
 
-> Nos dias de hoje temos uma possibilidade cada vez mais colocada em consideração: O fim da água potável no mundo. Estamos cada vez desperdiçando mais e mais água potável, esta que não é um recurso infinito e é vital para o ser humano, isso pode causar consequências horríveis para a humanidade e até mesmo condenar sua existência. Por isso, pensando em economizar o máximo de água o possível, criamos o Hydro-Economizer.
+> Nos dias de hoje temos uma possibilidade cada vez mais colocada em consideração: o fim da água potável no mundo. Estamos cada vez desperdiçando mais e mais água potável, esta que não é um recurso infinito e é vital para o ser humano, isso pode causar consequências horríveis para a humanidade e até mesmo condenar sua existência. Por isso, pensando em economizar o máximo de água o possível, criamos o Hydro-Economizer.
  
 
 ### 3.MINI-MUNDO Novo<br>
