@@ -26,13 +26,13 @@ Este documento contém a especificação do projeto do banco de dados Hydro Econ
 
 O projeto Hydro Economizer precisa inicialmente dos seguintes relatórios:
 
-1º) Relatório contendo as informações da casa cadastrada, ou seja, o endereço e o número de cômodos;
+1º) Relatório contendo a hora média em que o consumo é mais elevado por residência;
 
-2°) Relatório contendo as informações do usuário, ou seja, nome e cpf;
+2°) Relatório contendo o consumo diário total;
 
-3°) Relatório contendo informações relacionadas aos sensores, ou seja, o tipo de sensor, cômodo que está localizado e um código de identificação;
+3°) Relatório contendo o consumo médio mensal de cada usuário;
 
-4°) Relatório contendo informações relacionadas ao consumo, como a quantidade de litros captada pelo sensor em um determinado período de tempo;
+4°) 
 
 
 #### 4.2 TABELA DE DADOS DO SISTEMA:
