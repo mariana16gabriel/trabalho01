@@ -473,11 +473,15 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
     OBS: Incluir para cada tópico as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
-<b> USUARIO </b>
+<b> RESIDÊNCIA </b>
 ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/residencia.png?raw="true" "little")
+<b> DADO </b>
 ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/dado.png?raw="true" "little")
+<b> SENSOR </b>
 ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/sensor.png?raw="true" "little")
+<b> USUARIO </b>
 ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/usuario.png?raw="true" "little")
+<b> USUARIO_RESIDÊNCIA </b>
 ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/usuario_residencia.png?raw="true" "little")
 
 
