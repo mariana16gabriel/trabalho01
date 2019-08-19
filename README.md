@@ -131,7 +131,7 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
 #### 8.1 DETALHAMENTO DAS INFORMAÇÕES
-        INSERT INTO RESIDENCIA (codigo, endereco, numero_comodos) VALUES 
+         INSERT INTO RESIDENCIA (codigo, endereco, numero_comodos) VALUES 
         (1264932, 'R. das Goiabas, 296 - qd-1 lt-14, Morada de Laranjeiras - Serra, ES', 10),
         (2896907, 'Av Paulo Pereira Gomes, 803 - LJ 1, Morada de Laranjeiras - Serra, ES', 8), 
         (9876544, 'R Joaquim Lírio, 753, Praia Canto - Vitória, ES', 7),
@@ -141,7 +141,12 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         (1523799, 'R Henrique Laranja, 318, Centro - Vila Velha, ES', 15),
         (9999999, 'Av Champagnat, 304 - s-101, Centro - Vila Velha, ES', 20),
         (5554441, 'R José Ricardo, 210, Ibes - Vila Velha, ES', 12),
-        (1115489, 'R Carolina Leal, 107, Olaria - Vila Velha, ES', 8);
+        (1115489, 'R Carolina Leal, 107, Olaria - Vila Velha, ES', 8),
+        (5738383, 'Av Getúlio Vargas, 36, Vila Rubim - Vitória, ES', 11),
+        (0165942, 'Av Getúlio Vargas, 34, Vila Rubim - Vitória, ES', 9),
+        (0000001, 'R da Prainha, 29, Grande Vitória - Vitória, ES', 12),
+        (2222228, 'R 8 de Julho, 110, Grande Vitória - Vitória, ES', 14),
+        (7767798, 'R 11 de Janeiro, 46, Grande Vitória - Vitória, ES', 4);
 
         INSERT INTO SENSOR (codigo, tipo_sensor, local_da_casa, FK_RESIDENCIA_codigo) VALUES
         (1462779, 'tubulação', 'lavabo', 1264932),
@@ -153,7 +158,12 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         (2456702, 'tubulação', 'quintal', 1523799),
         (4684225, 'tubulação', 'banheiro', 9999999),
         (2253688, 'tubulação', 'banheiro', 5554441),
-        (1156855, 'tubulação', 'cozinha', 1115489);
+        (1156855, 'tubulação', 'cozinha', 1115489),
+        (1111145, 'tubulação', 'lavabo', 5738383),
+        (5637669, 'tubulação', 'banheiro', 0165942),
+        (2364767, 'tubulação', 'cozinha', 0000001),
+        (1237345, 'tubulação', 'quintal', 2222228),
+        (4002892, 'tubulação', 'banheiro', 7767798);
 
         INSERT INTO DADO (codigo, data_hora, valor, FK_SENSOR_codigo) VALUES
         (1234567, '2019-04-02 00:00:00', 10, 1462779),
@@ -165,7 +175,12 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         (4587129, '2016-05-30 12:32:00', 1, 2456702),
         (8877554, '2015-10-27 16:07:00', 2, 4684225),
         (4474799, '2019-11-17 06:00:00', 4, 2253688),
-        (1235467, '2018-09-14 20:10:00', 6.8, 1156855);
+        (1235467, '2018-09-14 20:10:00', 6.8, 1156855),
+        (9999946, '2019-09-14 20:10:00', 0.6, 1111145),
+        (4574337, '2019-09-14 14:10:00', 0.1, 5637669),
+        (8089555, '2018-06-01 01:10:00', 80, 2364767),
+        (9999992, '2018-06-01 01:10:00', 70, 1237345),
+        (5456562, '2010-08-04 00:14:00', 45, 4002892);
 
         INSERT INTO USUARIO (codigo, nome, cpf) VALUES
         (2345222, 'Mariana Tassan', 12345678910),	
@@ -177,7 +192,12 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         (1574806, 'Suzana Pereira', 78910111213),	
         (3368907, 'Marcos Ferraz', 89101112131),
         (6774322, 'Priscila Pinto', 91011121314),	
-        (2566788, 'João Ferreira', 10111213141);	
+        (2566788, 'João Ferreira', 10111213141),	
+        (4444121, 'Mariana Pinto', 11739825458),
+        (5553331, 'Mariana Ferraz', 98754482288),
+        (9990003, 'Mariana Gabriel', 33387497825),
+        (2572557, 'Mariana Júlia', 75395128642),
+        (5462222, 'Gabriel Rego', 14725896495);
 
         INSERT INTO Usuario_residencia (fk_USUARIO_codigo, fk_RESIDENCIA_codigo) VALUES
         (2345222, 1264932),
@@ -189,8 +209,28 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         (1574806, 1523799),
         (3368907, 9999999),
         (6774322, 5554441),
-        (2566788, 1115489);
-
+        (2566788, 1115489),
+        (4444121, 5738383),
+        (5553331, 0165942),
+        (9990003, 0000001),
+        (2572557, 2222228),
+        (5462222, 7767798),
+        (2345222, 0000001),
+        (9908466, 1234567),
+        (1252705, 0000001),
+        (2566788, 1264932),
+        (8709431, 5467801),
+        (4527869, 0000001),
+        (3368907, 1234561),
+        (6774322, 0165942),
+        (5553331, 2222228),
+        (1574806, 2896907),
+        (9990003, 9999999),
+        (4444121, 1115489),
+        (2345222, 2896907),
+        (2572557, 5467801),
+        (9990003, 5738383);
+        
 #### 8.2 INCLUSÃO DO SCRIPT PARA CRIAÇÃO DE TABELA E INSERÇÃO DOS DADOS
         
         CREATE TABLE USUARIO (
@@ -433,6 +473,8 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
     OBS: Incluir para cada tópico as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
+
+
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
     a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
