@@ -473,6 +473,11 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
     OBS: Incluir para cada tópico as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/modelo_final.png?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/modelo_final.png?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/modelo_final.png?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/modelo_final.png?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/modelo_final.png?raw="true" "little")
 
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
