@@ -77,7 +77,6 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
     
 
 ### 7	MODELO FÍSICO<br>
-/* Lógico: */
 
 CREATE TABLE USUARIO (
     cpf varchar(20),
