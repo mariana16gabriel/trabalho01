@@ -32,7 +32,6 @@ O projeto Hydro Economizer precisa inicialmente dos seguintes relatórios:
 
 3°) Relatório contendo o consumo médio mensal de cada usuário;
 
-4°) 
 
 
 #### 4.2 TABELA DE DADOS DO SISTEMA:
@@ -44,6 +43,7 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 #### 5.1 Validação do Modelo Conceitual
     Grupo01: Caio Lessa e Lucas Tejada
     Grupo02: Beatriz Auer e Júlia Suzano
+    
     
 #### 5.2 DESCRIÇÃO DOS DADOS 
 
@@ -77,57 +77,88 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
     
 
 ### 7	MODELO FÍSICO<br>
+/* Lógico: */
 
-         CREATE TABLE USUARIO (
-             codigo integer PRIMARY KEY,
-             nome varchar(50),
-             cpf bigint
-         );
+CREATE TABLE USUARIO (
+    cpf varchar(20),
+    codigo varchar(8) PRIMARY KEY,
+    nome varchar(40)
+);
 
-         CREATE TABLE RESIDENCIA (
-             codigo integer PRIMARY KEY,
-             endereco varchar(100),
-             numero_comodos integer
-         );
+CREATE TABLE RESIDENCIA (
+    complemento varchar(20),
+    nome_logradouro varchar(40),
+    numero varchar(40),
+    bairro varchar(40),
+    municipio varchar(40),
+    estado varchar(40),
+    numero_comodos integer,
+    codigo varchar(8) PRIMARY KEY,
+    tipo_logradouro varchar(5)
+);
 
-         CREATE TABLE SENSOR (
-             codigo integer PRIMARY KEY,
-             tipo_sensor varchar(30),
-             local_da_casa varchar(20),
-             FK_RESIDENCIA_codigo integer
-         );
+CREATE TABLE DADO (
+    codigo varchar(8) PRIMARY KEY,
+    data_hora timestamp,
+    valor float,
+    FK_SENSOR_codigo varchar(8)
+);
 
-         CREATE TABLE DADO (
-             valor float,
-             data_hora timestamp,
-             codigo integer PRIMARY KEY,
-             FK_SENSOR_codigo integer
-         );
+CREATE TABLE SENSOR (
+    codigo varchar(8) PRIMARY KEY,
+    FK_RESIDENCIA_codigo varchar(8),
+    FK_LOCAL_DA_CASA_codigo_sensor varchar(8)
+);
 
-         CREATE TABLE Usuario_residencia (
-             fk_USUARIO_codigo integer,
-             fk_RESIDENCIA_codigo integer
-         );
+CREATE TABLE TIPO_SENSOR (
+    codigo varchar(8) PRIMARY KEY,
+    tipo varchar(20),
+    quantidade_quantidade_ integer,
+    FK_SENSOR_codigo varchar(8)
+);
 
-         ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
-             FOREIGN KEY (FK_RESIDENCIA_codigo)
-             REFERENCES RESIDENCIA (codigo)
-             ON DELETE RESTRICT;
+CREATE TABLE LOCAL_DA_CASA (
+    codigo_sensor varchar(8) PRIMARY KEY,
+    local varchar(20),
+    quantidade_local integer
+);
 
-         ALTER TABLE DADO ADD CONSTRAINT FK_DADO_2
-             FOREIGN KEY (FK_SENSOR_codigo)
-             REFERENCES SENSOR (codigo)
-             ON DELETE RESTRICT;
+CREATE TABLE usuario_residencia (
+    fk_USUARIO_codigo varchar(8),
+    fk_RESIDENCIA_codigo varchar(8)
+);
+ 
+ALTER TABLE DADO ADD CONSTRAINT FK_DADO_2
+    FOREIGN KEY (FK_SENSOR_codigo)
+    REFERENCES SENSOR (codigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
+    FOREIGN KEY (FK_RESIDENCIA_codigo)
+    REFERENCES RESIDENCIA (codigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_3
+    FOREIGN KEY (FK_LOCAL_DA_CASA_codigo_sensor)
+    REFERENCES LOCAL_DA_CASA (codigo_sensor)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE TIPO_SENSOR ADD CONSTRAINT FK_TIPO_SENSOR_2
+    FOREIGN KEY (FK_SENSOR_codigo)
+    REFERENCES SENSOR (codigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE usuario_residencia ADD CONSTRAINT FK_usuario_residencia_1
+    FOREIGN KEY (fk_USUARIO_codigo)
+    REFERENCES USUARIO (codigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE usuario_residencia ADD CONSTRAINT FK_usuario_residencia_2
+    FOREIGN KEY (fk_RESIDENCIA_codigo)
+    REFERENCES RESIDENCIA (codigo)
+    ON DELETE RESTRICT;
 
-         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_1
-             FOREIGN KEY (fk_USUARIO_codigo)
-             REFERENCES USUARIO (codigo)
-             ON DELETE RESTRICT;
-
-         ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Possui_2
-             FOREIGN KEY (fk_RESIDENCIA_codigo)
-             REFERENCES RESIDENCIA (codigo)
-             ON DELETE RESTRICT;         
+                                                                                   
 
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
 #### 8.1 DETALHAMENTO DAS INFORMAÇÕES
