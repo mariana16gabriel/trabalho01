@@ -78,6 +78,8 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 
 ### 7	MODELO FÍSICO<br>
 
+/* logico: */
+
 CREATE TABLE USUARIO (
     cpf varchar(20),
     codigo varchar(8) PRIMARY KEY,
@@ -88,10 +90,6 @@ CREATE TABLE RESIDENCIA (
     complemento varchar(20),
     nome_logradouro varchar(40),
     numero varchar(40),
-    bairro varchar(40),
-    municipio varchar(40),
-    estado varchar(40),
-    numero_comodos integer,
     codigo varchar(8) PRIMARY KEY,
     tipo_logradouro varchar(5)
 );
@@ -105,21 +103,31 @@ CREATE TABLE DADO (
 
 CREATE TABLE SENSOR (
     codigo varchar(8) PRIMARY KEY,
-    FK_RESIDENCIA_codigo varchar(8),
-    FK_LOCAL_DA_CASA_codigo_sensor varchar(8)
+    FK_RESIDENCIA_codigo varchar(8)
 );
 
-CREATE TABLE TIPO_SENSOR (
+CREATE TABLE BAIRRO (
     codigo varchar(8) PRIMARY KEY,
-    tipo varchar(20),
-    quantidade_quantidade_ integer,
-    FK_SENSOR_codigo varchar(8)
+    nome varchar(20),
+    FK_RESIDENCIA_codigo varchar(8)
 );
 
-CREATE TABLE LOCAL_DA_CASA (
-    codigo_sensor varchar(8) PRIMARY KEY,
-    local varchar(20),
-    quantidade_local integer
+CREATE TABLE MUNICIPIO (
+    codigo varchar(8) PRIMARY KEY,
+    nome varchar(20),
+    FK_RESIDENCIA_codigo varchar(8)
+);
+
+CREATE TABLE COMODO (
+    codigo varchar(8) PRIMARY KEY,
+    nome_comodo varchar(20),
+    FK_RESIDENCIA_codigo varchar(8)
+);
+
+CREATE TABLE ESTADO (
+    codigo varchar(8) PRIMARY KEY,
+    nome varchar(20),
+    FK_RESIDENCIA_codigo varchar(8)
 );
 
 CREATE TABLE usuario_residencia (
@@ -137,14 +145,24 @@ ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
     REFERENCES RESIDENCIA (codigo)
     ON DELETE RESTRICT;
  
-ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_3
-    FOREIGN KEY (FK_LOCAL_DA_CASA_codigo_sensor)
-    REFERENCES LOCAL_DA_CASA (codigo_sensor)
+ALTER TABLE BAIRRO ADD CONSTRAINT FK_BAIRRO_2
+    FOREIGN KEY (FK_RESIDENCIA_codigo)
+    REFERENCES RESIDENCIA (codigo)
     ON DELETE RESTRICT;
  
-ALTER TABLE TIPO_SENSOR ADD CONSTRAINT FK_TIPO_SENSOR_2
-    FOREIGN KEY (FK_SENSOR_codigo)
-    REFERENCES SENSOR (codigo)
+ALTER TABLE MUNICIPIO ADD CONSTRAINT FK_MUNICIPIO_2
+    FOREIGN KEY (FK_RESIDENCIA_codigo)
+    REFERENCES RESIDENCIA (codigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE COMODO ADD CONSTRAINT FK_COMODO_2
+    FOREIGN KEY (FK_RESIDENCIA_codigo)
+    REFERENCES RESIDENCIA (codigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE ESTADO ADD CONSTRAINT FK_ESTADO_2
+    FOREIGN KEY (FK_RESIDENCIA_codigo)
+    REFERENCES RESIDENCIA (codigo)
     ON DELETE RESTRICT;
  
 ALTER TABLE usuario_residencia ADD CONSTRAINT FK_usuario_residencia_1
