@@ -39,7 +39,7 @@ O projeto Hydro Economizer precisa inicialmente dos seguintes relatórios:
 https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 
 ### 5.MODELO CONCEITUAL<br>
-   ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/print_conceitual.png?raw="true" "little")
+   ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/conceitual.png?raw="true" "little")
 #### 5.1 Validação do Modelo Conceitual
     Grupo01: Caio Lessa e Lucas Tejada
     Grupo02: Beatriz Auer e Júlia Suzano
