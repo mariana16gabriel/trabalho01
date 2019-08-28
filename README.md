@@ -26,11 +26,15 @@ Este documento contém a especificação do projeto do banco de dados Hydro Econ
 
 O projeto Hydro Economizer precisa inicialmente dos seguintes relatórios:
 
-1º) Relatório contendo a hora média em que o consumo é mais elevado por residência;
+1º) Relatório contendo a hora em que o consumo é mais elevado por residência no intervalo de 1 semana;
 
-2°) Relatório contendo o consumo diário total;
+2º) Relatório contendo a quantidade de sensores existentes num bairro;
 
-3°) Relatório contendo o consumo médio mensal de cada usuário;
+3º) Relatório contendo o número de usuários num município;
+
+4º) Relatório contendo o número de sensores por usuário;
+
+5º) Relatório contendo a quantidade de água consumida numa rua/avenida num período de 1 semana.
 
 
 
