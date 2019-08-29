@@ -12,7 +12,7 @@ Gabriel_Borges: gmarinho14@gmail.com<br>
 Este documento contém a especificação do projeto do banco de dados Hydro Economizer 
 <br>e motivação da escolha realizada. <br>
 
-> Nos dias de hoje temos uma possibilidade cada vez mais colocada em consideração: o fim da água potável no mundo. Estamos desperdiçando cada vez mais água potável, esta que é um recurso finito e vital para o ser humano, isso pode causar consequências horríveis para a humanidade e até mesmo condenar sua existência. Por isso, pensando em economizar o máximo de água o possível, criamos o Hydro-Economizer.
+> O desperdício de água potável é um grande problema no mundo, já que esta é um recurso finito e vital para os seres humanos. Pensando em uma forma de evitar esse deperdício no meio doméstico, criamos o sistema de monitoramento de água em residências, o Hydro Economizer, diferentemente dos concorrentes presentes no mercado, o Hydro Economizer não controla o uso de água, realizando cortes indesejados, pois acreditamos que a conscientização deve vir de cada usuário.
  
 
 ### 3.MINI-MUNDO Novo<br>
