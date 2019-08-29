@@ -17,7 +17,7 @@ Este documento contém a especificação do projeto do banco de dados Hydro Econ
 
 ### 3.MINI-MUNDO Novo<br>
 
->O sistema de monitoramento de consumo de água Hydro-Economizer conta com a instalação de sensores na tubulação de qualquer residência, de onde é obtido informações relativas ao consumo, como a quantidade de água captada em determinado período de tempo. Tais informações ficam armazenadas no banco de dados do sistema, sendo possível consultá-las a fim de gerar relatórios que auxiliem no controle do uso da água. 
+>O sistema de monitoramento de consumo de água Hydro-Economizer conta com a instalação de sensores na tubulação de qualquer residência, de onde é obtido informações relativas ao consumo, como a quantidade de água captada em determinado período de tempo. Tais informações ficam armazenadas no banco de dados do sistema, sendo possível consultá-las a fim de gerar relatórios que auxiliem o usuário no controle do uso da água. 
 
 ### 4.RASCUNHOS BÁSICOS DA INTERFACE (MOCKUPS)<br>
 
