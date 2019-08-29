@@ -12,12 +12,12 @@ Gabriel_Borges: gmarinho14@gmail.com<br>
 Este documento contém a especificação do projeto do banco de dados Hydro Economizer 
 <br>e motivação da escolha realizada. <br>
 
-> Nos dias de hoje temos uma possibilidade cada vez mais colocada em consideração: o fim da água potável no mundo. Estamos cada vez desperdiçando mais e mais água potável, esta que não é um recurso infinito e é vital para o ser humano, isso pode causar consequências horríveis para a humanidade e até mesmo condenar sua existência. Por isso, pensando em economizar o máximo de água o possível, criamos o Hydro-Economizer.
+> Nos dias de hoje temos uma possibilidade cada vez mais colocada em consideração: o fim da água potável no mundo. Estamos desperdiçando cada vez mais água potável, esta que é um recurso finito e vital para o ser humano, isso pode causar consequências horríveis para a humanidade e até mesmo condenar sua existência. Por isso, pensando em economizar o máximo de água o possível, criamos o Hydro-Economizer.
  
 
 ### 3.MINI-MUNDO Novo<br>
 
->O Hydro-Economizer armazenará o nome do usuário e o seu cpf. Para cadastrar a residência, será armazenado o endereço do usuário e o número de cômodos. Através de sensores implementados na tubulação, serão captadas as informações do consumo, como o instante da captura e a quantidade, em litros. Os sensores são identificados de acordo com seu tipo, cômodo que se encontra e por um código de identificação.
+>O sistema de monitoramento de consumo de água Hydro-Economizer conta com a instalação de sensores na tubulação de qualquer residência, de onde é obtido informações relativas ao consumo, como a quantidade de água captada em determinado período de tempo. Tais informações ficam armazenadas no banco de dados do sistema, sendo possível consultá-las a fim de gerar relatórios que auxiliem no controle do uso da água. 
 
 ### 4.RASCUNHOS BÁSICOS DA INTERFACE (MOCKUPS)<br>
 
