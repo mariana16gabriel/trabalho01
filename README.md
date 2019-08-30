@@ -76,11 +76,11 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
     codigo: campo de identificação.
     
 
-### 6	MODELO LÓGICO<br>
+### 6	MODELO FÍSICO<br>
    ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/logico_finall.png?raw="true" "little")
     
 
-### 7	MODELO FÍSICO<br>
+### 7	MODELO LÓGICO<br>
 
 /* Lógico_1: */
 
