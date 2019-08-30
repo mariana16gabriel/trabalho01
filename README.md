@@ -77,12 +77,10 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
     
 
 ### 6	MODELO LÓGICO<br>
-   ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/logico_finalll.png?raw="true" "little")
+   ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/logico_fina.png?raw="true" "little")
     
 
 ### 7	MODELO FÍSICO<br>
-
-/* FÍSICO: */
 
 CREATE TABLE USUARIO (
     codigo varchar(8) PRIMARY KEY,
@@ -101,8 +99,6 @@ CREATE TABLE RESIDENCIA (
     nome_logradouro varchar(50),
     numero int,
     complemento varchar(50),
-    FK_ESTADO_codigo varchar(8),
-    FK_MUNICIPIO_codigo varchar(8),
     FK_BAIRRO_codigo varchar(8)
 );
 
@@ -147,16 +143,6 @@ ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
     ON DELETE RESTRICT;
  
 ALTER TABLE RESIDENCIA ADD CONSTRAINT FK_RESIDENCIA_2
-    FOREIGN KEY (FK_ESTADO_codigo)
-    REFERENCES ESTADO (codigo)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE RESIDENCIA ADD CONSTRAINT FK_RESIDENCIA_3
-    FOREIGN KEY (FK_MUNICIPIO_codigo)
-    REFERENCES MUNICIPIO (codigo)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE RESIDENCIA ADD CONSTRAINT FK_RESIDENCIA_4
     FOREIGN KEY (FK_BAIRRO_codigo)
     REFERENCES BAIRRO (codigo)
     ON DELETE RESTRICT;
