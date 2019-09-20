@@ -19,22 +19,19 @@ Este documento contém a especificação do projeto do banco de dados Hydro Econ
 
 >O sistema de monitoramento de consumo de água Hydro-Economizer conta com a instalação de sensores na tubulação de qualquer residência, de onde é obtido informações relativas ao consumo, como a quantidade de água captada em determinado período de tempo. Tais informações ficam armazenadas no banco de dados do sistema, sendo possível consultá-las a fim de gerar relatórios que auxiliem o usuário no controle do uso da água. 
 
-### 4.RASCUNHOS BÁSICOS DA INTERFACE (MOCKUPS)<br>
-
-
 #### 4.1 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM O SISTEMA PROPOSTO?
 
 O projeto Hydro Economizer precisa inicialmente dos seguintes relatórios:
 
-1º) Relatório contendo a hora em que o consumo é mais elevado por residência no intervalo de 1 semana;
+1º) Em que horas na semana o consumo é mais elevado em cada residência?
 
-2º) Relatório contendo a quantidade de sensores existentes num bairro;
+2º) Qual o consumo médio de um bairro?
 
-3º) Relatório contendo o número de usuários num município;
+3º) Qual a diferença entre o maior e o menor consumo por Estado?
 
-4º) Relatório contendo o número de sensores por usuário;
+4º) Em quais municípios se encontram mais usuários?
 
-5º) Relatório contendo a quantidade de água consumida numa rua/avenida num período de 1 semana.
+5º) O quanto de água foi consumido numa rua ou avenida em uma semana? 
 
 
 
@@ -90,7 +87,10 @@ CREATE TABLE USUARIO (
 
 CREATE TABLE SENSOR (
     codigo varchar(8) PRIMARY KEY,
-    FK_RESIDENCIA_codigo varchar(8)
+    latitude float,
+    longitude float,
+    FK_RESIDENCIA_codigo varchar(8),
+    FK_COMODO_codigo varchar(8)
 );
 
 CREATE TABLE RESIDENCIA (
@@ -99,7 +99,9 @@ CREATE TABLE RESIDENCIA (
     nome_logradouro varchar(50),
     numero int,
     complemento varchar(50),
-    FK_BAIRRO_codigo varchar(8)
+    FK_BAIRRO_codigo varchar(8),
+    FK_ESTADO_codigo varchar(8),
+    FK_MUNICIPIO_codigo varchar(8)
 );
 
 CREATE TABLE ESTADO (
@@ -109,14 +111,12 @@ CREATE TABLE ESTADO (
 
 CREATE TABLE BAIRRO (
     nome varchar(20),
-    codigo varchar(8) PRIMARY KEY,
-    FK_MUNICIPIO_codigo varchar(8)
+    codigo varchar(8) PRIMARY KEY
 );
 
 CREATE TABLE MUNICIPIO (
     codigo varchar(8) PRIMARY KEY,
-    nome varchar(20),
-    FK_ESTADO_codigo varchar(8)
+    nome varchar(20)
 );
 
 CREATE TABLE DADO (
@@ -142,19 +142,24 @@ ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_2
     REFERENCES RESIDENCIA (codigo)
     ON DELETE RESTRICT;
  
+ALTER TABLE SENSOR ADD CONSTRAINT FK_SENSOR_3
+    FOREIGN KEY (FK_COMODO_codigo)
+    REFERENCES COMODO (codigo)
+    ON DELETE RESTRICT;
+ 
 ALTER TABLE RESIDENCIA ADD CONSTRAINT FK_RESIDENCIA_2
     FOREIGN KEY (FK_BAIRRO_codigo)
     REFERENCES BAIRRO (codigo)
     ON DELETE RESTRICT;
  
-ALTER TABLE BAIRRO ADD CONSTRAINT FK_BAIRRO_2
-    FOREIGN KEY (FK_MUNICIPIO_codigo)
-    REFERENCES MUNICIPIO (codigo)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE MUNICIPIO ADD CONSTRAINT FK_MUNICIPIO_2
+ALTER TABLE RESIDENCIA ADD CONSTRAINT FK_RESIDENCIA_3
     FOREIGN KEY (FK_ESTADO_codigo)
     REFERENCES ESTADO (codigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE RESIDENCIA ADD CONSTRAINT FK_RESIDENCIA_4
+    FOREIGN KEY (FK_MUNICIPIO_codigo)
+    REFERENCES MUNICIPIO (codigo)
     ON DELETE RESTRICT;
  
 ALTER TABLE DADO ADD CONSTRAINT FK_DADO_2
