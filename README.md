@@ -185,22 +185,76 @@ ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Usuario_residencia_2
 
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
 #### 8.1 DETALHAMENTO DAS INFORMAÇÕES
-         INSERT INTO RESIDENCIA (codigo, endereco, numero_comodos) VALUES 
-        (1264932, 'R. das Goiabas, 296 - qd-1 lt-14, Morada de Laranjeiras - Serra, ES', 10),
-        (2896907, 'Av Paulo Pereira Gomes, 803 - LJ 1, Morada de Laranjeiras - Serra, ES', 8), 
-        (9876544, 'R Joaquim Lírio, 753, Praia Canto - Vitória, ES', 7),
-        (1234567, 'R Cândido Portinari, 27 - lj-1, Santa Luíza - Vitória, ES', 11),
-        (1234561, 'R Fortunato Ramos, 30 - s-309, Santa Lúcia - Vitória, ES', 10),
-        (5467801, 'R Misael Pedreira da Silva, 48, Santa Lúcia - Vitória, ES', 6),
-        (1523799, 'R Henrique Laranja, 318, Centro - Vila Velha, ES', 15),
-        (9999999, 'Av Champagnat, 304 - s-101, Centro - Vila Velha, ES', 20),
-        (5554441, 'R José Ricardo, 210, Ibes - Vila Velha, ES', 12),
-        (1115489, 'R Carolina Leal, 107, Olaria - Vila Velha, ES', 8),
-        (5738383, 'Av Getúlio Vargas, 36, Vila Rubim - Vitória, ES', 11),
-        (0165942, 'Av Getúlio Vargas, 34, Vila Rubim - Vitória, ES', 9),
-        (0000001, 'R da Prainha, 29, Grande Vitória - Vitória, ES', 12),
-        (2222228, 'R 8 de Julho, 110, Grande Vitória - Vitória, ES', 14),
-        (7767798, 'R 11 de Janeiro, 46, Grande Vitória - Vitória, ES', 4);
+        INSERT INTO USUARIO (codigo, nome, cpf) VALUES
+    ('2345222', 'Mariana Tassan', 12345678910),	
+    ('8709431', 'Gabriel Marinho', 23456789101),
+    ('1254673', 'Augusto Silva', 34567891011),
+    ('9908466', 'Juliana Nogueira', 45678910111),	
+    ('1252705', 'Felipe Souza', 56789101112),
+    (4527869, 'Emanuel Andrade', 67891011121),	
+    (1574806, 'Suzana Pereira', 78910111213),	
+    (3368907, 'Marcos Ferraz', 89101112131),
+    (6774322, 'Priscila Pinto', 91011121314),	
+    (2566788, 'João Ferreira', 10111213141),	
+    (4444121, 'Mariana Pinto', 11739825458),
+    (5553331, 'Mariana Ferraz', 98754482288),
+    (9990003, 'Mariana Gabriel', 33387497825),
+    (2572557, 'Mariana Júlia', 75395128642),
+    (5462222, 'Gabriel Rego', 14725896495);
+    
+    INSERT INTO ESTADO (CODIGO, NOME) VALUES
+    ('11333222', 'Rio de Janeiro'),
+    ('00008887', 'São Paulo'),
+    ('77777444', 'Espírito Santo'),
+    ('22222655', 'Bahia'),
+    ('78907889', 'Santa Catarina'),
+    ('77776655', 'Minas Gerais'),
+    ('12596643', 'Acre'),
+    ('89766786', 'Amazonas'),
+    ('87456655', 'Roraima'),
+    ('09876452', 'Pernambuco'),
+    ('11663335', 'Ceará'),
+    ('76578853', 'Rondônia'),
+    ('36666676', 'Mato Grosso'),
+    ('88888555', 'Goiás'),
+    ('96676765', 'Paraná');
+    
+    INSERT INTO MUNICIPIO (CODIGO, NOME) VALUES
+    ('00088788', 'Rio de Janeiro'),
+    ('12346665', 'São Paulo'),
+    ('45534878', 'Vitória'),
+    ('45454545', 'Serra'),
+    ('08638656', 'Vila Velha'),
+    ('33333355', 'Florianópolis'),
+    ('75646756', 'Búzios'),
+    ('88948478', 'Recife'),
+    ('21121211', 'Paraty'),
+    ('98788566', 'Salvador'),
+    ('66688866', 'Cariacica'),
+    ('23567356', 'Viana'),
+    ('28356856', 'Campinas'),
+    ('90656777', 'Natal'),
+    ('12489000', 'Porto Alegre');
+    
+    INSERT INTO BAIRRO (CODIGO, NOME) VALUES
+    ('23412890', 'Morada laranjeiras'),
+    ('78945499', 'Laranjeiras'),
+    ('78907894', 'Colina Laranjeiras'),
+    ('92378673', 'Valparaíso'),
+    ('27495723', 'Feu Rosa'),
+    ('17234665', 'Nova Carapina'),
+    ('04589278', 'Praia da Costa'),
+    ('00112334', 'Itaparica'),
+    ('47384783', 'Itapuã'),
+    ('39292229', 'Novo México'),
+    ('24523656', 'Jardim Colorado'),
+    ('09280549', 'Jardim Camburi'),
+    ('11211209', 'Jardim da Penha'),
+    ('02394822', 'Praia do Canto'),
+    ('27847584', 'Mata da Praia');
+
+
+
 
         INSERT INTO SENSOR (codigo, tipo_sensor, local_da_casa, FK_RESIDENCIA_codigo) VALUES
         (1462779, 'tubulação', 'lavabo', 1264932),
