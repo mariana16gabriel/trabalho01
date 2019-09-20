@@ -74,7 +74,7 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
     
 
 ### 6	MODELO LÓGICO<br>
-   ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/logico_fina.png?raw="true" "little")
+   ![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/logico_esse.png?raw="true" "little")
     
 
 ### 7	MODELO FÍSICO<br>
