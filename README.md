@@ -191,16 +191,16 @@ ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Usuario_residencia_2
     ('1254673', 'Augusto Silva', 34567891011),
     ('9908466', 'Juliana Nogueira', 45678910111),	
     ('1252705', 'Felipe Souza', 56789101112),
-    (4527869, 'Emanuel Andrade', 67891011121),	
-    (1574806, 'Suzana Pereira', 78910111213),	
-    (3368907, 'Marcos Ferraz', 89101112131),
-    (6774322, 'Priscila Pinto', 91011121314),	
-    (2566788, 'João Ferreira', 10111213141),	
-    (4444121, 'Mariana Pinto', 11739825458),
-    (5553331, 'Mariana Ferraz', 98754482288),
-    (9990003, 'Mariana Gabriel', 33387497825),
-    (2572557, 'Mariana Júlia', 75395128642),
-    (5462222, 'Gabriel Rego', 14725896495);
+    ('4527869', 'Emanuel Andrade', 67891011121),	
+    ('1574806', 'Suzana Pereira', 78910111213),	
+    ('3368907', 'Marcos Ferraz', 89101112131),
+    ('6774322', 'Priscila Pinto', 91011121314),	
+    ('2566788', 'João Ferreira', 10111213141),	
+    ('4444121', 'Mariana Pinto', 11739825458),
+    ('5553331', 'Mariana Ferraz', 98754482288),
+    ('9990003', 'Mariana Gabriel', 33387497825),
+    ('2572557', 'Mariana Júlia', 75395128642),
+    ('5462222', 'Gabriel Rego', 14725896495);
     
     INSERT INTO ESTADO (CODIGO, NOME) VALUES
     ('11333222', 'Rio de Janeiro'),
@@ -303,6 +303,19 @@ ALTER TABLE Usuario_residencia ADD CONSTRAINT FK_Usuario_residencia_2
     ('96786572','2018-06-01 01:10:00','1','47865322'),
     ('34576444','2018-06-01 01:10:00','9','10000444'),
     ('87655554','2010-08-04 00:14:00','9','10033854');
+    
+      INSERT INTO RESIDENCIA (CODIGO,TIPO_LOGRADOURO,NOME_LOGRADOURO,NUMERO,COMPLEMENTO,FK_BAIRRO_CODIGO,FK_ESTADO_CODIGO,FK_MUNICIPIO_CODIGO)
+     VALUES
+     ('12341324', 'R', 'Minas Gerais', 1290, 'Apartamento 1001', '23412890', '77777444', '45454545'),
+     ('51324312', 'R', 'Marataízes', 301, 'Apartamento 504', '23412890', '77777444','45454545'),
+     ('17658214', 'Av', 'Paulo Pereira Gomes', 500, Null, '23412890', '77777444', '45454545'),
+     ('85676523', 'Av', 'Civit', 240, 'Apartamento 301', '23412890', '77777444', '45454545'),
+     ('63451342', 'Av', 'Leandro Hassun', 120, Null, '27495723', '77777444', '45454545'),
+     ('53453462', 'R', 'Nando Moura', 730, 'Apartamento 1502', '00112334', '77777444', '08638656'),
+     ('12454326', 'R', 'Humberto Serrano', 280, 'Apartamento 903', '04589278', '77777444', '08638656'),
+     ('76745454', 'Av', 'Champangnat', 1020, Null, '04589278', '77777444', '08638656'),
+     ('32456734', 'R', 'Rômulo Mendonça', 410, 'Apartamento 201', '02394822', '77777444', '45534878'),
+     ('73452345', 'R', 'Augusto Carrara', 820, 'Apartamento 1604', '09280549', '77777444', '45534878');
 
 
 
