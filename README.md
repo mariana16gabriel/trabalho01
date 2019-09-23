@@ -928,11 +928,15 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
     OBS: Incluir para cada tópico as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
-![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/residencia.png?raw="true" "little")
-![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/dado.png?raw="true" "little")
-![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/sensor.png?raw="true" "little")
-![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/usuario.png?raw="true" "little")
-![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/usuario_residencia.png?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/residencia.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/usuario.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/usuario_residencia.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/Sensor.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/Bairro.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/Estado.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/Municipio.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/Comodo.PNG?raw="true" "little")
+![Alt text](https://github.com/mariana16gabriel/trabalho01/blob/master/Dado.PNG?raw="true" "little")
 
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
