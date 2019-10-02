@@ -48,29 +48,43 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
     
 #### 5.2 DESCRIÇÃO DOS DADOS 
 
-    USUARIO: tabela que armazena as informações cadastrais relativas ao usuário:
-    
+    USUARIO: tabela que armazena as informações cadastrais relativas ao usuário;
     cpf: campo que armazena o número de Cadastro de Pessoa Física para cada usuário;
     nome: campo que armazena o nome do usuário;
+    codigo: campo de identificação.
+    
+    RESIDENCIA: tabela que armazena as informações relativas à residência;
     codigo: campo de identificação;
+    tipo_logradouro: campo que define se o endereço é de uma rua ou avenida;
+    nome_logradouro: campo que identifica o nome da rua ou avenida;
+    numero: campo que armazena o número da residência;
+    complemento: se a residência for uma casa, será preenchido com informações adicionais do endereço. Se for um apartamento, ficará vazio.
     
-    RESIDENCIA: tabela que armazena as informações relativas à residência:
-    
-    endereço: campo que armazena o endereço de cada moradia cadastrada;
-    numero_comodos: campo que armazena a quantidade de cômodos da residência;
+    ESTADO: tabela que armazena o Estado em que a residência cadastrada se encontra;
     codigo: campo de identificação;
+    nome: campo que armazena o nome do Estado.
     
-    SENSOR: tabela que armazena as informações reativas aos sensores:
+    MUNICIPIO: tabela que armazena o município em que a residência cadastrada se encontra;
+    codigo: campo de identificação;
+    nome: campo que armazena o nome do município.
     
-    tipo_sensor: campo contendo o tipo de sensor utilizado;
-    local_da_casa: campo contendo o cômodo onde o sensor está localizado;
+    BAIRRO: tabela que armazena o bairro em que a residência cadastrada se encontra;
+    codigo: campo de identificação;
+    nome: campo que armazena o nome do bairro.
+    
+    SENSOR: tabela que armazena as informações relativas aos sensores:
+    latitude: campo que armazena a latitude do sensor;
+    longitude: campo que armazena a longitude do sensor;
     codigo: campo de identificação de cada sensor;
     
-    DADO: tabela que armazena as informações relativas ao consumo geradas pelos sensores: 
-    
-    data_hora: campo que armazena a data e/ou hora de captura do sensor;
+    DADO: tabela que armazena as informações relativas ao consumo obtidas pelos sensores: 
+    data_hora: campo que armazena a data e a hora de captura do sensor;
     valor: campo que armazena a quantidade de água captada pelo sensor;
     codigo: campo de identificação.
+    
+    COMODO: tabela que armazena os cômodos de cada residência;
+    codigo: campo de indetificação de cada cômodo;
+    nome_complemento: campo que armazena o nome do cômodo.
     
 
 ### 6	MODELO LÓGICO<br>
