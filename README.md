@@ -371,6 +371,263 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
      ('2566788', '73452345'),
      ('2566788', '53453462'),
      ('2566788', '12454326');
+     
+
+#### 8.1 DETALHAMENTO DAS INFORMAÇÕES- DADOS FAKES
+fake_person_names = Person('pt')
+for i in range(20):
+  cpf = ""
+  for j in range(11):
+    cpf += str(randint(0, 9))
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  name = fake_person_names.full_name()
+  data = (code, name, cpf)
+  
+  cur.execute("start transaction")
+  insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fakes = Factory.create('pt_BR')
+code = ""
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  city = fakes.city()
+  data = (code, city)
+  cur.execute("start transaction")
+  insert = """insert into municipio (codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fakes = Factory.create('pt_BR')
+ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
+      'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, ba[i])
+  cur.execute("start transaction")
+  insert = """insert into bairro (codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fakes = Factory.create('pt_BR')
+es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
+      'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, es[i])
+  cur.execute("start transaction")
+  insert = """insert into estado(codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("start transaction")
+insert = """select codigo from municipio"""
+cur.execute(insert, data)
+result = cur.fetchall()
+cur.execute("commit")
+lstcodemun = []
+for i in range(len(result)):
+  lstcodemun.append(result[i][0])
+
+cur.execute("start transaction")
+insert = """select codigo from bairro"""
+cur.execute(insert, data)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstcodebai = []
+for i in range(len(result2)):
+  lstcodebai.append(result2[i][0])
+  
+cur.execute("start transaction")
+insert = """select codigo from estado"""
+cur.execute(insert, data)
+result3 = cur.fetchall()
+cur.execute("commit")
+lstcodeest = []
+for i in range(len(result3)):
+  lstcodeest.append(result3[i][0])
+  
+for i in range(20):
+  print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
+
+fake = Factory.create('pt_BR')
+for k in range(20):
+  r = fake.street_name()
+  lstr = r.split(" ")
+  prefix = ""
+  for i in range(len(lstr)):
+    if i == 0:
+      if lstr[i][0:3] != "Rua":
+        prefix = lstr[i][0:2]
+      else: prefix = lstr[i][0:1]
+  nom = ""
+  for i in range(1,len(lstr)):
+    nom += lstr[i] + " "
+  num = fake.building_number()
+  rnd = randint(0, 2)
+  comp = ""
+  if rnd == 0:
+    comp = None
+  elif rnd ==1:
+    comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
+  elif rnd == 2:
+    comp = "Lote " + str(randint(1, 10))
+
+  cur.execute("start transaction")
+  insert = """select codigo from municipio"""
+  cur.execute(insert)
+  result = cur.fetchall()
+  cur.execute("commit")
+  lstcodemun = []
+  for i in range(len(result)):
+    lstcodemun.append(result[i][0])
+
+  cur.execute("start transaction")
+  insert = """select codigo from bairro"""
+  cur.execute(insert)
+  result2 = cur.fetchall()
+  cur.execute("commit")
+  lstcodebai = []
+  for i in range(len(result2)):
+    lstcodebai.append(result2[i][0])
+
+  cur.execute("start transaction")
+  insert = """select codigo from estado"""
+  cur.execute(insert)
+  result3 = cur.fetchall()
+  cur.execute("commit")
+  lstcodeest = []
+  for i in range(len(result3)):
+    lstcodeest.append(result3[i][0])
+
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+
+  bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
+  mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
+  est = lstcodeest[randint(0, len(lstcodeest)- 1)]
+
+  data  = (code, prefix, nom, num, comp, bai, est, mun)
+  cur.execute("start transaction")
+  insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit") 
+  #print(data)
+
+fake = Factory.create('pt_BR')
+fake.building_number()
+
+cur.execute("start transaction")
+insert = """select codigo from usuario"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lstu = []
+for j in range(len(result)):
+    lstu.append(result[j][0])
+    
+  
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result2)):
+    lstr.append(result2[j][0])
+
+for i in range(100):
+  data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
+  cur.execute("start transaction")
+  insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result2)):
+    lstr.append(result2[j][0])
+com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
+
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
+  cur.execute("start transaction")
+  insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fake = Factory.create()
+
+
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result)):
+    lstr.append(result[j][0])
+    
+cur.execute("start transaction")
+insert = """select codigo from comodo"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstc = []
+for j in range(len(result2)):
+    lstc.append(result2[j][0])
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
+  cur.execute("start transaction")
+  insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+from random import uniform
+
+cur.execute("start transaction")
+insert = """select codigo from sensor"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lsts = []
+for j in range(len(result)):
+    lsts.append(result[j][0])
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  date = str(fake.date_time(tzinfo=None, end_datetime=None))
+  val = round(uniform(0.0, 100.0), 2)
+  
+  data = (code, date, val, lsts[randint(0, len(lsts) -1)])
+  cur.execute("start transaction")
+  insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("commit")
+
 
 #### 8.2 INCLUSÃO DO SCRIPT PARA CRIAÇÃO DE TABELA E INSERÇÃO DOS DADOS
         
@@ -477,176 +734,260 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         REFERENCES RESIDENCIA (codigo)
         ON DELETE RESTRICT;
 
-    INSERT INTO USUARIO (codigo, nome, cpf) VALUES
-     ('2345222', 'Mariana Tassan', 12345678910),	
-     ('8709431', 'Gabriel Marinho', 23456789101),
-     ('1254673', 'Augusto Silva', 34567891011),
-     ('9908466', 'Juliana Nogueira', 45678910111),	
-     ('1252705', 'Felipe Souza', 56789101112),
-     ('4527869', 'Emanuel Andrade', 67891011121),	
-     ('1574806', 'Suzana Pereira', 78910111213),	
-     ('3368907', 'Marcos Ferraz', 89101112131),
-     ('6774322', 'Priscila Pinto', 91011121314),	
-     ('2566788', 'João Ferreira', 10111213141),	
-     ('4444121', 'Mariana Pinto', 11739825458),
-     ('5553331', 'Mariana Ferraz', 98754482288),
-     ('9990003', 'Mariana Gabriel', 33387497825),
-     ('2572557', 'Mariana Júlia', 75395128642),
-     ('5462222', 'Gabriel Rego', 14725896495);
+   fake_person_names = Person('pt')
+for i in range(20):
+  cpf = ""
+  for j in range(11):
+    cpf += str(randint(0, 9))
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  name = fake_person_names.full_name()
+  data = (code, name, cpf)
+  
+  cur.execute("start transaction")
+  insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fakes = Factory.create('pt_BR')
+code = ""
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  city = fakes.city()
+  data = (code, city)
+  cur.execute("start transaction")
+  insert = """insert into municipio (codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fakes = Factory.create('pt_BR')
+ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
+      'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, ba[i])
+  cur.execute("start transaction")
+  insert = """insert into bairro (codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fakes = Factory.create('pt_BR')
+es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
+      'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, es[i])
+  cur.execute("start transaction")
+  insert = """insert into estado(codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("start transaction")
+insert = """select codigo from municipio"""
+cur.execute(insert, data)
+result = cur.fetchall()
+cur.execute("commit")
+lstcodemun = []
+for i in range(len(result)):
+  lstcodemun.append(result[i][0])
+
+cur.execute("start transaction")
+insert = """select codigo from bairro"""
+cur.execute(insert, data)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstcodebai = []
+for i in range(len(result2)):
+  lstcodebai.append(result2[i][0])
+  
+cur.execute("start transaction")
+insert = """select codigo from estado"""
+cur.execute(insert, data)
+result3 = cur.fetchall()
+cur.execute("commit")
+lstcodeest = []
+for i in range(len(result3)):
+  lstcodeest.append(result3[i][0])
+  
+for i in range(20):
+  print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
+
+fake = Factory.create('pt_BR')
+for k in range(20):
+  r = fake.street_name()
+  lstr = r.split(" ")
+  prefix = ""
+  for i in range(len(lstr)):
+    if i == 0:
+      if lstr[i][0:3] != "Rua":
+        prefix = lstr[i][0:2]
+      else: prefix = lstr[i][0:1]
+  nom = ""
+  for i in range(1,len(lstr)):
+    nom += lstr[i] + " "
+  num = fake.building_number()
+  rnd = randint(0, 2)
+  comp = ""
+  if rnd == 0:
+    comp = None
+  elif rnd ==1:
+    comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
+  elif rnd == 2:
+    comp = "Lote " + str(randint(1, 10))
+
+  cur.execute("start transaction")
+  insert = """select codigo from municipio"""
+  cur.execute(insert)
+  result = cur.fetchall()
+  cur.execute("commit")
+  lstcodemun = []
+  for i in range(len(result)):
+    lstcodemun.append(result[i][0])
+
+  cur.execute("start transaction")
+  insert = """select codigo from bairro"""
+  cur.execute(insert)
+  result2 = cur.fetchall()
+  cur.execute("commit")
+  lstcodebai = []
+  for i in range(len(result2)):
+    lstcodebai.append(result2[i][0])
+
+  cur.execute("start transaction")
+  insert = """select codigo from estado"""
+  cur.execute(insert)
+  result3 = cur.fetchall()
+  cur.execute("commit")
+  lstcodeest = []
+  for i in range(len(result3)):
+    lstcodeest.append(result3[i][0])
+
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+
+  bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
+  mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
+  est = lstcodeest[randint(0, len(lstcodeest)- 1)]
+
+  data  = (code, prefix, nom, num, comp, bai, est, mun)
+  cur.execute("start transaction")
+  insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit") 
+  #print(data)
+
+fake = Factory.create('pt_BR')
+fake.building_number()
+
+cur.execute("start transaction")
+insert = """select codigo from usuario"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lstu = []
+for j in range(len(result)):
+    lstu.append(result[j][0])
     
-    INSERT INTO ESTADO (CODIGO, NOME) VALUES
-    ('11333222', 'Rio de Janeiro'),
-    ('00008887', 'São Paulo'),
-    ('77777444', 'Espírito Santo'),
-    ('22222655', 'Bahia'),
-    ('78907889', 'Santa Catarina'),
-    ('77776655', 'Minas Gerais'),
-    ('12596643', 'Acre'),
-    ('89766786', 'Amazonas'),
-    ('87456655', 'Roraima'),
-    ('09876452', 'Pernambuco'),
-    ('11663335', 'Ceará'),
-    ('76578853', 'Rondônia'),
-    ('36666676', 'Mato Grosso'),
-    ('88888555', 'Goiás'),
-    ('96676765', 'Paraná');
-    
-    INSERT INTO MUNICIPIO (CODIGO, NOME) VALUES
-    ('00088788', 'Rio de Janeiro'),
-    ('12346665', 'São Paulo'),
-    ('45534878', 'Vitória'),
-    ('45454545', 'Serra'),
-    ('08638656', 'Vila Velha'),
-    ('33333355', 'Florianópolis'),
-    ('75646756', 'Búzios'),
-    ('88948478', 'Recife'),
-    ('21121211', 'Paraty'),
-    ('98788566', 'Salvador'),
-    ('66688866', 'Cariacica'),
-    ('23567356', 'Viana'),
-    ('28356856', 'Campinas'),
-    ('90656777', 'Natal'),
-    ('12489000', 'Porto Alegre');
-    
-    INSERT INTO BAIRRO (CODIGO, NOME) VALUES
-    ('23412890', 'Morada laranjeiras'),
-    ('78945499', 'Laranjeiras'),
-    ('78907894', 'Colina Laranjeiras'),
-    ('92378673', 'Valparaíso'),
-    ('27495723', 'Feu Rosa'),
-    ('17234665', 'Nova Carapina'),
-    ('04589278', 'Praia da Costa'),
-    ('00112334', 'Itaparica'),
-    ('47384783', 'Itapuã'),
-    ('39292229', 'Novo México'),
-    ('24523656', 'Jardim Colorado'),
-    ('09280549', 'Jardim Camburi'),
-    ('11211209', 'Jardim da Penha'),
-    ('02394822', 'Praia do Canto'),
-    ('27847584', 'Mata da Praia');
-    
-    INSERT INTO COMODO (codigo, nome_complemento,FK_RESIDENCIA_codigo) VALUES
-        ('19284661','banheiro','12341324'),
-        ('24357988','cozinha','51324312'),
-        ('44433430','lavabo','17658214'),
-        ('12395731','lavanderia','85676523'),
-        ('11111006','quintal','63451342'),
-        ('44445733','garagem','53453462'),
-        ('12000912','banheiro','12454326'),
-        ('65000765','cozinha','76745454'),
-        ('98644432','lavabo','32456734'),
-        ('55553332','lavanderia','73452345'),
-        ('12367788','quintal','12415121'),
-        ('88886664','garagem','12213421'),
-        ('11111338','banheiro','53432243'),
-        ('12456333','cozinha','51231424'),
-        ('88889901','lavabo','15324123');
+  
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result2)):
+    lstr.append(result2[j][0])
+
+for i in range(100):
+  data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
+  cur.execute("start transaction")
+  insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result2)):
+    lstr.append(result2[j][0])
+com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
+
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
+  cur.execute("start transaction")
+  insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fake = Factory.create()
 
 
-    INSERT INTO SENSOR (codigo,latitude,longitude,FK_RESIDENCIA_codigo,FK_COMODO_codigo) VALUES
-    ('32325656',40.601203,-9.665677,'12341324','19284661'),
-    ('76763526',40.601201,-15.668173,'51324312','24357988'),
-    ('64444566',21.601203,-12.668173,'17658214','44433430'),
-    ('09875665',45.601203,-11.668173,'85676523','12395731'),
-    ('00056730',46.861203,-8.467173,'63451342','11111006'),
-    ('11100421',33.601203,-10.668173,'53453462','44445733'),
-    ('66644200',20.701203,-9.668173,'12454326','12000912'),
-    ('00000004',21.601203,-1.668173,'76745454','65000765'),
-    ('44446678',87.601203,-2.668173,'32456734','98644432'),
-    ('11235543',40.601281,-3.668173,'73452345','55553332'),
-    ('09876567',28.601203,-4.668173,'12415121','12367788'),
-    ('44565686',29.601203,-5.668173,'12213421','88886664'),
-    ('47865322',30.605203,-6.668173,'53432243','11111338'),
-    ('10000444',12.601203,-7.668173,'51231424','12456333'),
-    ('10033854',50.501203,-8.668173,'15324123','88889901');
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result)):
+    lstr.append(result[j][0])
     
-    
-    INSERT INTO DADO (codigo, data_hora, valor,FK_SENSOR_codigo) VALUES
-    ('22233227','2019-04-02 00:00:00','10','32325656'),
-    ('23478999','2019-04-01 13:20:00','1','76763526'),
-    ('54674478','2018-12-19 15:20:00','1','64444566'),
-    ('13453367','2017-06-01 01:00:00','2','09875665'),
-    ('97465554','2019-09-01 07:45:00','2','00056730'),
-    ('22333434','2019-04-14 08:13:00','4','11100421'),
-    ('89886676','2016-05-30 12:32:00','6','66644200'),
-    ('34456777','2015-10-27 16:07:00','25','00000004'),
-    ('33466685','2019-11-17 06:00:0','4','44446678'),
-    ('34456765','2018-09-14 20:10:00','4','11235543'),
-    ('53435455','2019-09-14 20:10:00','2','09876567'),
-    ('78967832','2019-09-14 14:10:00','1','44565686'),
-    ('96786572','2018-06-01 01:10:00','1','47865322'),
-    ('34576444','2018-06-01 01:10:00','9','10000444'),
-    ('87655554','2010-08-04 00:14:00','9','10033854');
-    
-      INSERT INTO RESIDENCIA (CODIGO,TIPO_LOGRADOURO,NOME_LOGRADOURO,NUMERO,COMPLEMENTO,FK_BAIRRO_CODIGO,FK_ESTADO_CODIGO,FK_MUNICIPIO_CODIGO)
-     VALUES
-     ('12341324', 'R', 'Minas Gerais', 1290, 'Apartamento 1001', '23412890', '77777444', '45454545'),
-     ('51324312', 'R', 'Marataízes', 301, 'Apartamento 504', '23412890', '77777444','45454545'),
-     ('17658214', 'Av', 'Paulo Pereira Gomes', 500, Null, '23412890', '77777444', '45454545'),
-     ('85676523', 'Av', 'Civit', 240, 'Apartamento 301', '23412890', '77777444', '45454545'),
-     ('63451342', 'Av', 'Leandro Hassun', 120, Null, '27495723', '77777444', '45454545'),
-     ('53453462', 'R', 'Nando Moura', 730, 'Apartamento 1502', '00112334', '77777444', '08638656'),
-     ('12454326', 'R', 'Humberto Serrano', 280, 'Apartamento 903', '04589278', '77777444', '08638656'),
-     ('76745454', 'Av', 'Champangnat', 1020, Null, '04589278', '77777444', '08638656'),
-     ('32456734', 'R', 'Rômulo Mendonça', 410, 'Apartamento 201', '02394822', '77777444', '45534878'),
-     ('73452345', 'R', 'Augusto Carrara', 820, 'Apartamento 1604', '09280549', '77777444', '45534878');
-     ('12415121', 'R', 'Castelo Branco', 1540, 'Apartamento 1304', '24523656', '77777444', '08638656'),
-     ('12213421', 'R', 'Marataízes', 301, 'Apartamento 504', '24523656', '77777444','08638656'),
-     ('53432243', 'Av', 'Júlio Prestes', 3200, Null, '24523656', '77777444', '08638656'),
-     ('51231424', 'R', 'Deodoro da Fonseca', 240, 'Apartamento 230', '27847584', '77777444', '45534878'),
-     ('15324123', 'Av', 'Eurico Gaspar Dutra', 560, Null, '27847584', '77777444', '45534878');
-     
-     INSERT INTO USUARIO_RESIDENCIA(FK_USUARIO_CODIGO, FK_RESIDENCIA_CODIGO) VALUES
-     ('2345222', '12341324'),
-     ('2345222', '63451342'),
-     ('2345222','17658214' ),
-     ('8709431','63451342' ),
-     ('8709431', '12341324'),
-     ('8709431', '51231424'),
-     ('1254673', '51231424'),
-     ('1254673', '51324312'),
-     ('1254673', '15324123'),
-     ('9908466', '15324123'),
-     ('9908466', '51324312'),
-     ('9908466', '53432243'),
-     ('1252705','17658214' ),
-     ('1252705', '53432243'),
-     ('1252705', '76745454'),
-     ('4527869', '12213421'),
-     ('4527869', '76745454'),
-     ('4527869','85676523' ),
-     ('1574806', '32456734'),
-     ('1574806', '12415121'),
-     ('1574806','85676523' ),
-     ('3368907', '12213421'),
-     ('3368907','12415121' ),
-     ('3368907','12454326' ),
-     ('6774322', '32456734'),
-     ('6774322', '53453462'),
-     ('6774322', '73452345'),
-     ('2566788', '73452345'),
-     ('2566788', '53453462'),
-     ('2566788', '12454326');
+cur.execute("start transaction")
+insert = """select codigo from comodo"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstc = []
+for j in range(len(result2)):
+    lstc.append(result2[j][0])
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
+  cur.execute("start transaction")
+  insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+from random import uniform
+
+cur.execute("start transaction")
+insert = """select codigo from sensor"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lsts = []
+for j in range(len(result)):
+    lsts.append(result[j][0])
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  date = str(fake.date_time(tzinfo=None, end_datetime=None))
+  val = round(uniform(0.0, 100.0), 2)
+  
+  data = (code, date, val, lsts[randint(0, len(lsts) -1)])
+  cur.execute("start transaction")
+  insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("commit")
+
         
 #### 8.3 INCLUSÃO DO SCRIPT PARA EXCLUSÃO DE TABELAS EXISTENTES, CRIAÇÃO DE TABELA NOVAS E INSERÇÃO DOS DADOS
          
@@ -771,174 +1112,259 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
         REFERENCES RESIDENCIA (codigo)
         ON DELETE RESTRICT;
 
-    INSERT INTO USUARIO (codigo, nome, cpf) VALUES
-     ('2345222', 'Mariana Tassan', 12345678910),	
-     ('8709431', 'Gabriel Marinho', 23456789101),
-     ('1254673', 'Augusto Silva', 34567891011),
-     ('9908466', 'Juliana Nogueira', 45678910111),	
-     ('1252705', 'Felipe Souza', 56789101112),
-     ('4527869', 'Emanuel Andrade', 67891011121),	
-     ('1574806', 'Suzana Pereira', 78910111213),	
-     ('3368907', 'Marcos Ferraz', 89101112131),
-     ('6774322', 'Priscila Pinto', 91011121314),	
-     ('2566788', 'João Ferreira', 10111213141),	
-     ('4444121', 'Mariana Pinto', 11739825458),
-     ('5553331', 'Mariana Ferraz', 98754482288),
-     ('9990003', 'Mariana Gabriel', 33387497825),
-     ('2572557', 'Mariana Júlia', 75395128642),
-     ('5462222', 'Gabriel Rego', 14725896495);
-    
-    INSERT INTO ESTADO (CODIGO, NOME) VALUES
-    ('11333222', 'Rio de Janeiro'),
-    ('00008887', 'São Paulo'),
-    ('77777444', 'Espírito Santo'),
-    ('22222655', 'Bahia'),
-    ('78907889', 'Santa Catarina'),
-    ('77776655', 'Minas Gerais'),
-    ('12596643', 'Acre'),
-    ('89766786', 'Amazonas'),
-    ('87456655', 'Roraima'),
-    ('09876452', 'Pernambuco'),
-    ('11663335', 'Ceará'),
-    ('76578853', 'Rondônia'),
-    ('36666676', 'Mato Grosso'),
-    ('88888555', 'Goiás'),
-    ('96676765', 'Paraná');
-    
-    INSERT INTO MUNICIPIO (CODIGO, NOME) VALUES
-    ('00088788', 'Rio de Janeiro'),
-    ('12346665', 'São Paulo'),
-    ('45534878', 'Vitória'),
-    ('45454545', 'Serra'),
-    ('08638656', 'Vila Velha'),
-    ('33333355', 'Florianópolis'),
-    ('75646756', 'Búzios'),
-    ('88948478', 'Recife'),
-    ('21121211', 'Paraty'),
-    ('98788566', 'Salvador'),
-    ('66688866', 'Cariacica'),
-    ('23567356', 'Viana'),
-    ('28356856', 'Campinas'),
-    ('90656777', 'Natal'),
-    ('12489000', 'Porto Alegre');
-    
-    INSERT INTO BAIRRO (CODIGO, NOME) VALUES
-    ('23412890', 'Morada laranjeiras'),
-    ('78945499', 'Laranjeiras'),
-    ('78907894', 'Colina Laranjeiras'),
-    ('92378673', 'Valparaíso'),
-    ('27495723', 'Feu Rosa'),
-    ('17234665', 'Nova Carapina'),
-    ('04589278', 'Praia da Costa'),
-    ('00112334', 'Itaparica'),
-    ('47384783', 'Itapuã'),
-    ('39292229', 'Novo México'),
-    ('24523656', 'Jardim Colorado'),
-    ('09280549', 'Jardim Camburi'),
-    ('11211209', 'Jardim da Penha'),
-    ('02394822', 'Praia do Canto'),
-    ('27847584', 'Mata da Praia');
-    
-    INSERT INTO COMODO (codigo, nome_complemento,FK_RESIDENCIA_codigo) VALUES
-    ('19284661','banheiro','00665324'),
-    ('24357988','cozinha','15555332'),
-    ('44433430','lavabo','22255683'),
-    ('12395731','lavanderia','15297655'),
-    ('11111006','quintal','55333532'),
-    ('44445733','garagem','09757444'),
-    ('12000912','banheiro','11111112'),
-    ('65000765','cozinha','22222215'),
-    ('98644432','lavabo','63333544'),
-    ('55553332','lavanderia','44544336'),
-    ('12367788','quintal','10100202'),
-    ('88886664','garagem','22765566'),
-    ('11111338','banheiro','12312223'),
-    ('12456333','cozinha','33345899'),
-    ('88889901','lavabo','66767676');
+fake_person_names = Person('pt')
+for i in range(20):
+  cpf = ""
+  for j in range(11):
+    cpf += str(randint(0, 9))
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  name = fake_person_names.full_name()
+  data = (code, name, cpf)
+  
+  cur.execute("start transaction")
+  insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
 
-    INSERT INTO SENSOR (codigo,latitude,longitude,FK_RESIDENCIA_codigo,FK_COMODO_codigo) VALUES
-     ('32325656',40.601203,-9.665677,'12341324','19284661'),
-     ('76763526',40.601201,-15.668173,'51324312','24357988'),
-     ('64444566',21.601203,-12.668173,'17658214','44433430'),
-     ('09875665',45.601203,-11.668173,'85676523','12395731'),
-     ('00056730',46.861203,-8.467173,'63451342','11111006'),
-     ('11100421',33.601203,-10.668173,'53453462','44445733'),
-     ('66644200',20.701203,-9.668173,'12454326','12000912'),
-     ('00000004',21.601203,-1.668173,'76745454','65000765'),
-     ('44446678',87.601203,-2.668173,'32456734','98644432'),
-     ('11235543',40.601281,-3.668173,'73452345','55553332'),
-     ('09876567',28.601203,-4.668173,'12415121','12367788'),
-     ('44565686',29.601203,-5.668173,'12213421','88886664'),
-     ('47865322',30.605203,-6.668173,'53432243','11111338'),
-     ('10000444',12.601203,-7.668173,'51231424','12456333'),
-     ('10033854',50.501203,-8.668173,'15324123','88889901');
+fakes = Factory.create('pt_BR')
+code = ""
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  city = fakes.city()
+  data = (code, city)
+  cur.execute("start transaction")
+  insert = """insert into municipio (codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
 
-    INSERT INTO DADO (codigo, data_hora, valor,FK_SENSOR_codigo) VALUES
-    ('22233227','2019-04-02 00:00:00','10','32325656'),
-    ('23478999','2019-04-01 13:20:00','1','76763526'),
-    ('54674478','2018-12-19 15:20:00','1','64444566'),
-    ('13453367','2017-06-01 01:00:00','2','09875665'),
-    ('97465554','2019-09-01 07:45:00','2','00056730'),
-    ('22333434','2019-04-14 08:13:00','4','11100421'),
-    ('89886676','2016-05-30 12:32:00','6','66644200'),
-    ('34456777','2015-10-27 16:07:00','25','00000004'),
-    ('33466685','2019-11-17 06:00:0','4','44446678'),
-    ('34456765','2018-09-14 20:10:00','4','11235543'),
-    ('53435455','2019-09-14 20:10:00','2','09876567'),
-    ('78967832','2019-09-14 14:10:00','1','44565686'),
-    ('96786572','2018-06-01 01:10:00','1','47865322'),
-    ('34576444','2018-06-01 01:10:00','9','10000444'),
-    ('87655554','2010-08-04 00:14:00','9','10033854');
+fakes = Factory.create('pt_BR')
+ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
+      'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, ba[i])
+  cur.execute("start transaction")
+  insert = """insert into bairro (codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fakes = Factory.create('pt_BR')
+es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
+      'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, es[i])
+  cur.execute("start transaction")
+  insert = """insert into estado(codigo, nome) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("start transaction")
+insert = """select codigo from municipio"""
+cur.execute(insert, data)
+result = cur.fetchall()
+cur.execute("commit")
+lstcodemun = []
+for i in range(len(result)):
+  lstcodemun.append(result[i][0])
+
+cur.execute("start transaction")
+insert = """select codigo from bairro"""
+cur.execute(insert, data)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstcodebai = []
+for i in range(len(result2)):
+  lstcodebai.append(result2[i][0])
+  
+cur.execute("start transaction")
+insert = """select codigo from estado"""
+cur.execute(insert, data)
+result3 = cur.fetchall()
+cur.execute("commit")
+lstcodeest = []
+for i in range(len(result3)):
+  lstcodeest.append(result3[i][0])
+  
+for i in range(20):
+  print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
+
+fake = Factory.create('pt_BR')
+for k in range(20):
+  r = fake.street_name()
+  lstr = r.split(" ")
+  prefix = ""
+  for i in range(len(lstr)):
+    if i == 0:
+      if lstr[i][0:3] != "Rua":
+        prefix = lstr[i][0:2]
+      else: prefix = lstr[i][0:1]
+  nom = ""
+  for i in range(1,len(lstr)):
+    nom += lstr[i] + " "
+  num = fake.building_number()
+  rnd = randint(0, 2)
+  comp = ""
+  if rnd == 0:
+    comp = None
+  elif rnd ==1:
+    comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
+  elif rnd == 2:
+    comp = "Lote " + str(randint(1, 10))
+
+  cur.execute("start transaction")
+  insert = """select codigo from municipio"""
+  cur.execute(insert)
+  result = cur.fetchall()
+  cur.execute("commit")
+  lstcodemun = []
+  for i in range(len(result)):
+    lstcodemun.append(result[i][0])
+
+  cur.execute("start transaction")
+  insert = """select codigo from bairro"""
+  cur.execute(insert)
+  result2 = cur.fetchall()
+  cur.execute("commit")
+  lstcodebai = []
+  for i in range(len(result2)):
+    lstcodebai.append(result2[i][0])
+
+  cur.execute("start transaction")
+  insert = """select codigo from estado"""
+  cur.execute(insert)
+  result3 = cur.fetchall()
+  cur.execute("commit")
+  lstcodeest = []
+  for i in range(len(result3)):
+    lstcodeest.append(result3[i][0])
+
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+
+  bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
+  mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
+  est = lstcodeest[randint(0, len(lstcodeest)- 1)]
+
+  data  = (code, prefix, nom, num, comp, bai, est, mun)
+  cur.execute("start transaction")
+  insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit") 
+  #print(data)
+
+fake = Factory.create('pt_BR')
+fake.building_number()
+
+cur.execute("start transaction")
+insert = """select codigo from usuario"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lstu = []
+for j in range(len(result)):
+    lstu.append(result[j][0])
     
-      INSERT INTO RESIDENCIA (CODIGO,TIPO_LOGRADOURO,NOME_LOGRADOURO,NUMERO,COMPLEMENTO,FK_BAIRRO_CODIGO,FK_ESTADO_CODIGO,FK_MUNICIPIO_CODIGO)
-     VALUES
-     ('12341324', 'R', 'Minas Gerais', 1290, 'Apartamento 1001', '23412890', '77777444', '45454545'),
-     ('51324312', 'R', 'Marataízes', 301, 'Apartamento 504', '23412890', '77777444','45454545'),
-     ('17658214', 'Av', 'Paulo Pereira Gomes', 500, Null, '23412890', '77777444', '45454545'),
-     ('85676523', 'Av', 'Civit', 240, 'Apartamento 301', '23412890', '77777444', '45454545'),
-     ('63451342', 'Av', 'Leandro Hassun', 120, Null, '27495723', '77777444', '45454545'),
-     ('53453462', 'R', 'Nando Moura', 730, 'Apartamento 1502', '00112334', '77777444', '08638656'),
-     ('12454326', 'R', 'Humberto Serrano', 280, 'Apartamento 903', '04589278', '77777444', '08638656'),
-     ('76745454', 'Av', 'Champangnat', 1020, Null, '04589278', '77777444', '08638656'),
-     ('32456734', 'R', 'Rômulo Mendonça', 410, 'Apartamento 201', '02394822', '77777444', '45534878'),
-     ('73452345', 'R', 'Augusto Carrara', 820, 'Apartamento 1604', '09280549', '77777444', '45534878');
-     ('12415121', 'R', 'Castelo Branco', 1540, 'Apartamento 1304', '24523656', '77777444', '08638656'),
-     ('12213421', 'R', 'Marataízes', 301, 'Apartamento 504', '24523656', '77777444','08638656'),
-     ('53432243', 'Av', 'Júlio Prestes', 3200, Null, '24523656', '77777444', '08638656'),
-     ('51231424', 'R', 'Deodoro da Fonseca', 240, 'Apartamento 230', '27847584', '77777444', '45534878'),
-     ('15324123', 'Av', 'Eurico Gaspar Dutra', 560, Null, '27847584', '77777444', '45534878');
-     
-     INSERT INTO USUARIO_RESIDENCIA(FK_USUARIO_CODIGO, FK_RESIDENCIA_CODIGO) VALUES
-     ('2345222', '12341324'),
-     ('2345222', '63451342'),
-     ('2345222','17658214' ),
-     ('8709431','63451342' ),
-     ('8709431', '12341324'),
-     ('8709431', '51231424'),
-     ('1254673', '51231424'),
-     ('1254673', '51324312'),
-     ('1254673', '15324123'),
-     ('9908466', '15324123'),
-     ('9908466', '51324312'),
-     ('9908466', '53432243'),
-     ('1252705','17658214' ),
-     ('1252705', '53432243'),
-     ('1252705', '76745454'),
-     ('4527869', '12213421'),
-     ('4527869', '76745454'),
-     ('4527869','85676523' ),
-     ('1574806', '32456734'),
-     ('1574806', '12415121'),
-     ('1574806','85676523' ),
-     ('3368907', '12213421'),
-     ('3368907','12415121' ),
-     ('3368907','12454326' ),
-     ('6774322', '32456734'),
-     ('6774322', '53453462'),
-     ('6774322', '73452345'),
-     ('2566788', '73452345'),
-     ('2566788', '53453462'),
-     ('2566788', '12454326');
+  
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result2)):
+    lstr.append(result2[j][0])
+
+for i in range(100):
+  data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
+  cur.execute("start transaction")
+  insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result2)):
+    lstr.append(result2[j][0])
+com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
+
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
+  cur.execute("start transaction")
+  insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+fake = Factory.create()
+
+
+cur.execute("start transaction")
+insert = """select codigo from residencia"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lstr = []
+for j in range(len(result)):
+    lstr.append(result[j][0])
+    
+cur.execute("start transaction")
+insert = """select codigo from comodo"""
+cur.execute(insert)
+result2 = cur.fetchall()
+cur.execute("commit")
+lstc = []
+for j in range(len(result2)):
+    lstc.append(result2[j][0])
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
+  cur.execute("start transaction")
+  insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+from random import uniform
+
+cur.execute("start transaction")
+insert = """select codigo from sensor"""
+cur.execute(insert)
+result = cur.fetchall()
+cur.execute("commit")
+lsts = []
+for j in range(len(result)):
+    lsts.append(result[j][0])
+for i in range(20):
+  code = ""
+  for j in range(7):
+    code += str(randint(0, 9))
+  date = str(fake.date_time(tzinfo=None, end_datetime=None))
+  val = round(uniform(0.0, 100.0), 2)
+  
+  data = (code, date, val, lsts[randint(0, len(lsts) -1)])
+  cur.execute("start transaction")
+  insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
+  cur.execute(insert, data)
+  cur.execute("commit")
+
+cur.execute("commit")
 
 ## Marco de Entrega 08 em: (29/05/2019)<br>
 
