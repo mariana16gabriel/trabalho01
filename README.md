@@ -374,259 +374,259 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabela_de_dados.xlsx
      
 
 #### 8.1 DETALHAMENTO DAS INFORMAÇÕES- DADOS FAKES
-fake_person_names = Person('pt')
-for i in range(20):
-  cpf = ""
-  for j in range(11):
-    cpf += str(randint(0, 9))
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  name = fake_person_names.full_name()
-  data = (code, name, cpf)
-  
-  cur.execute("start transaction")
-  insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fake_person_names = Person('pt')
+    for i in range(20):
+      cpf = ""
+      for j in range(11):
+        cpf += str(randint(0, 9))
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      name = fake_person_names.full_name()
+      data = (code, name, cpf)
 
-fakes = Factory.create('pt_BR')
-code = ""
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  city = fakes.city()
-  data = (code, city)
-  cur.execute("start transaction")
-  insert = """insert into municipio (codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+      cur.execute("start transaction")
+      insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-fakes = Factory.create('pt_BR')
-ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
-      'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, ba[i])
-  cur.execute("start transaction")
-  insert = """insert into bairro (codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fakes = Factory.create('pt_BR')
+    code = ""
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      city = fakes.city()
+      data = (code, city)
+      cur.execute("start transaction")
+      insert = """insert into municipio (codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-fakes = Factory.create('pt_BR')
-es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
-      'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, es[i])
-  cur.execute("start transaction")
-  insert = """insert into estado(codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fakes = Factory.create('pt_BR')
+    ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
+          'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, ba[i])
+      cur.execute("start transaction")
+      insert = """insert into bairro (codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from municipio"""
-cur.execute(insert, data)
-result = cur.fetchall()
-cur.execute("commit")
-lstcodemun = []
-for i in range(len(result)):
-  lstcodemun.append(result[i][0])
+    fakes = Factory.create('pt_BR')
+    es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
+          'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, es[i])
+      cur.execute("start transaction")
+      insert = """insert into estado(codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from bairro"""
-cur.execute(insert, data)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstcodebai = []
-for i in range(len(result2)):
-  lstcodebai.append(result2[i][0])
-  
-cur.execute("start transaction")
-insert = """select codigo from estado"""
-cur.execute(insert, data)
-result3 = cur.fetchall()
-cur.execute("commit")
-lstcodeest = []
-for i in range(len(result3)):
-  lstcodeest.append(result3[i][0])
-  
-for i in range(20):
-  print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
+    cur.execute("start transaction")
+    insert = """select codigo from municipio"""
+    cur.execute(insert, data)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstcodemun = []
+    for i in range(len(result)):
+      lstcodemun.append(result[i][0])
 
-fake = Factory.create('pt_BR')
-for k in range(20):
-  r = fake.street_name()
-  lstr = r.split(" ")
-  prefix = ""
-  for i in range(len(lstr)):
-    if i == 0:
-      if lstr[i][0:3] != "Rua":
-        prefix = lstr[i][0:2]
-      else: prefix = lstr[i][0:1]
-  nom = ""
-  for i in range(1,len(lstr)):
-    nom += lstr[i] + " "
-  num = fake.building_number()
-  rnd = randint(0, 2)
-  comp = ""
-  if rnd == 0:
-    comp = None
-  elif rnd ==1:
-    comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
-  elif rnd == 2:
-    comp = "Lote " + str(randint(1, 10))
+    cur.execute("start transaction")
+    insert = """select codigo from bairro"""
+    cur.execute(insert, data)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstcodebai = []
+    for i in range(len(result2)):
+      lstcodebai.append(result2[i][0])
 
-  cur.execute("start transaction")
-  insert = """select codigo from municipio"""
-  cur.execute(insert)
-  result = cur.fetchall()
-  cur.execute("commit")
-  lstcodemun = []
-  for i in range(len(result)):
-    lstcodemun.append(result[i][0])
+    cur.execute("start transaction")
+    insert = """select codigo from estado"""
+    cur.execute(insert, data)
+    result3 = cur.fetchall()
+    cur.execute("commit")
+    lstcodeest = []
+    for i in range(len(result3)):
+      lstcodeest.append(result3[i][0])
 
-  cur.execute("start transaction")
-  insert = """select codigo from bairro"""
-  cur.execute(insert)
-  result2 = cur.fetchall()
-  cur.execute("commit")
-  lstcodebai = []
-  for i in range(len(result2)):
-    lstcodebai.append(result2[i][0])
+    for i in range(20):
+      print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
 
-  cur.execute("start transaction")
-  insert = """select codigo from estado"""
-  cur.execute(insert)
-  result3 = cur.fetchall()
-  cur.execute("commit")
-  lstcodeest = []
-  for i in range(len(result3)):
-    lstcodeest.append(result3[i][0])
+    fake = Factory.create('pt_BR')
+    for k in range(20):
+      r = fake.street_name()
+      lstr = r.split(" ")
+      prefix = ""
+      for i in range(len(lstr)):
+        if i == 0:
+          if lstr[i][0:3] != "Rua":
+            prefix = lstr[i][0:2]
+          else: prefix = lstr[i][0:1]
+      nom = ""
+      for i in range(1,len(lstr)):
+        nom += lstr[i] + " "
+      num = fake.building_number()
+      rnd = randint(0, 2)
+      comp = ""
+      if rnd == 0:
+        comp = None
+      elif rnd ==1:
+        comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
+      elif rnd == 2:
+        comp = "Lote " + str(randint(1, 10))
 
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
+      cur.execute("start transaction")
+      insert = """select codigo from municipio"""
+      cur.execute(insert)
+      result = cur.fetchall()
+      cur.execute("commit")
+      lstcodemun = []
+      for i in range(len(result)):
+        lstcodemun.append(result[i][0])
 
-  bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
-  mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
-  est = lstcodeest[randint(0, len(lstcodeest)- 1)]
+      cur.execute("start transaction")
+      insert = """select codigo from bairro"""
+      cur.execute(insert)
+      result2 = cur.fetchall()
+      cur.execute("commit")
+      lstcodebai = []
+      for i in range(len(result2)):
+        lstcodebai.append(result2[i][0])
 
-  data  = (code, prefix, nom, num, comp, bai, est, mun)
-  cur.execute("start transaction")
-  insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit") 
-  #print(data)
+      cur.execute("start transaction")
+      insert = """select codigo from estado"""
+      cur.execute(insert)
+      result3 = cur.fetchall()
+      cur.execute("commit")
+      lstcodeest = []
+      for i in range(len(result3)):
+        lstcodeest.append(result3[i][0])
 
-fake = Factory.create('pt_BR')
-fake.building_number()
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
 
-cur.execute("start transaction")
-insert = """select codigo from usuario"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lstu = []
-for j in range(len(result)):
-    lstu.append(result[j][0])
-    
-  
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result2)):
-    lstr.append(result2[j][0])
+      bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
+      mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
+      est = lstcodeest[randint(0, len(lstcodeest)- 1)]
 
-for i in range(100):
-  data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
-  cur.execute("start transaction")
-  insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+      data  = (code, prefix, nom, num, comp, bai, est, mun)
+      cur.execute("start transaction")
+      insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit") 
+      #print(data)
 
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result2)):
-    lstr.append(result2[j][0])
-com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
+    fake = Factory.create('pt_BR')
+    fake.building_number()
 
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
-  cur.execute("start transaction")
-  insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
-
-fake = Factory.create()
+    cur.execute("start transaction")
+    insert = """select codigo from usuario"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstu = []
+    for j in range(len(result)):
+        lstu.append(result[j][0])
 
 
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result)):
-    lstr.append(result[j][0])
-    
-cur.execute("start transaction")
-insert = """select codigo from comodo"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstc = []
-for j in range(len(result2)):
-    lstc.append(result2[j][0])
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
-  cur.execute("start transaction")
-  insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result2)):
+        lstr.append(result2[j][0])
 
-from random import uniform
+    for i in range(100):
+      data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
+      cur.execute("start transaction")
+      insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from sensor"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lsts = []
-for j in range(len(result)):
-    lsts.append(result[j][0])
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  date = str(fake.date_time(tzinfo=None, end_datetime=None))
-  val = round(uniform(0.0, 100.0), 2)
-  
-  data = (code, date, val, lsts[randint(0, len(lsts) -1)])
-  cur.execute("start transaction")
-  insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result2)):
+        lstr.append(result2[j][0])
+    com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
 
-cur.execute("commit")
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
+      cur.execute("start transaction")
+      insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    fake = Factory.create()
+
+
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result)):
+        lstr.append(result[j][0])
+
+    cur.execute("start transaction")
+    insert = """select codigo from comodo"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstc = []
+    for j in range(len(result2)):
+        lstc.append(result2[j][0])
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
+      cur.execute("start transaction")
+      insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    from random import uniform
+
+    cur.execute("start transaction")
+    insert = """select codigo from sensor"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lsts = []
+    for j in range(len(result)):
+        lsts.append(result[j][0])
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      date = str(fake.date_time(tzinfo=None, end_datetime=None))
+      val = round(uniform(0.0, 100.0), 2)
+
+      data = (code, date, val, lsts[randint(0, len(lsts) -1)])
+      cur.execute("start transaction")
+      insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    cur.execute("commit")
 
 
 #### 8.2 INCLUSÃO DO SCRIPT PARA CRIAÇÃO DE TABELA E INSERÇÃO DOS DADOS
@@ -734,259 +734,259 @@ cur.execute("commit")
         REFERENCES RESIDENCIA (codigo)
         ON DELETE RESTRICT;
 
-   fake_person_names = Person('pt')
-for i in range(20):
-  cpf = ""
-  for j in range(11):
-    cpf += str(randint(0, 9))
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  name = fake_person_names.full_name()
-  data = (code, name, cpf)
-  
-  cur.execute("start transaction")
-  insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+       fake_person_names = Person('pt')
+    for i in range(20):
+      cpf = ""
+      for j in range(11):
+        cpf += str(randint(0, 9))
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      name = fake_person_names.full_name()
+      data = (code, name, cpf)
 
-fakes = Factory.create('pt_BR')
-code = ""
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  city = fakes.city()
-  data = (code, city)
-  cur.execute("start transaction")
-  insert = """insert into municipio (codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+      cur.execute("start transaction")
+      insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-fakes = Factory.create('pt_BR')
-ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
-      'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, ba[i])
-  cur.execute("start transaction")
-  insert = """insert into bairro (codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fakes = Factory.create('pt_BR')
+    code = ""
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      city = fakes.city()
+      data = (code, city)
+      cur.execute("start transaction")
+      insert = """insert into municipio (codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-fakes = Factory.create('pt_BR')
-es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
-      'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, es[i])
-  cur.execute("start transaction")
-  insert = """insert into estado(codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fakes = Factory.create('pt_BR')
+    ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
+          'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, ba[i])
+      cur.execute("start transaction")
+      insert = """insert into bairro (codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from municipio"""
-cur.execute(insert, data)
-result = cur.fetchall()
-cur.execute("commit")
-lstcodemun = []
-for i in range(len(result)):
-  lstcodemun.append(result[i][0])
+    fakes = Factory.create('pt_BR')
+    es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
+          'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, es[i])
+      cur.execute("start transaction")
+      insert = """insert into estado(codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from bairro"""
-cur.execute(insert, data)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstcodebai = []
-for i in range(len(result2)):
-  lstcodebai.append(result2[i][0])
-  
-cur.execute("start transaction")
-insert = """select codigo from estado"""
-cur.execute(insert, data)
-result3 = cur.fetchall()
-cur.execute("commit")
-lstcodeest = []
-for i in range(len(result3)):
-  lstcodeest.append(result3[i][0])
-  
-for i in range(20):
-  print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
+    cur.execute("start transaction")
+    insert = """select codigo from municipio"""
+    cur.execute(insert, data)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstcodemun = []
+    for i in range(len(result)):
+      lstcodemun.append(result[i][0])
 
-fake = Factory.create('pt_BR')
-for k in range(20):
-  r = fake.street_name()
-  lstr = r.split(" ")
-  prefix = ""
-  for i in range(len(lstr)):
-    if i == 0:
-      if lstr[i][0:3] != "Rua":
-        prefix = lstr[i][0:2]
-      else: prefix = lstr[i][0:1]
-  nom = ""
-  for i in range(1,len(lstr)):
-    nom += lstr[i] + " "
-  num = fake.building_number()
-  rnd = randint(0, 2)
-  comp = ""
-  if rnd == 0:
-    comp = None
-  elif rnd ==1:
-    comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
-  elif rnd == 2:
-    comp = "Lote " + str(randint(1, 10))
+    cur.execute("start transaction")
+    insert = """select codigo from bairro"""
+    cur.execute(insert, data)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstcodebai = []
+    for i in range(len(result2)):
+      lstcodebai.append(result2[i][0])
 
-  cur.execute("start transaction")
-  insert = """select codigo from municipio"""
-  cur.execute(insert)
-  result = cur.fetchall()
-  cur.execute("commit")
-  lstcodemun = []
-  for i in range(len(result)):
-    lstcodemun.append(result[i][0])
+    cur.execute("start transaction")
+    insert = """select codigo from estado"""
+    cur.execute(insert, data)
+    result3 = cur.fetchall()
+    cur.execute("commit")
+    lstcodeest = []
+    for i in range(len(result3)):
+      lstcodeest.append(result3[i][0])
 
-  cur.execute("start transaction")
-  insert = """select codigo from bairro"""
-  cur.execute(insert)
-  result2 = cur.fetchall()
-  cur.execute("commit")
-  lstcodebai = []
-  for i in range(len(result2)):
-    lstcodebai.append(result2[i][0])
+    for i in range(20):
+      print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
 
-  cur.execute("start transaction")
-  insert = """select codigo from estado"""
-  cur.execute(insert)
-  result3 = cur.fetchall()
-  cur.execute("commit")
-  lstcodeest = []
-  for i in range(len(result3)):
-    lstcodeest.append(result3[i][0])
+    fake = Factory.create('pt_BR')
+    for k in range(20):
+      r = fake.street_name()
+      lstr = r.split(" ")
+      prefix = ""
+      for i in range(len(lstr)):
+        if i == 0:
+          if lstr[i][0:3] != "Rua":
+            prefix = lstr[i][0:2]
+          else: prefix = lstr[i][0:1]
+      nom = ""
+      for i in range(1,len(lstr)):
+        nom += lstr[i] + " "
+      num = fake.building_number()
+      rnd = randint(0, 2)
+      comp = ""
+      if rnd == 0:
+        comp = None
+      elif rnd ==1:
+        comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
+      elif rnd == 2:
+        comp = "Lote " + str(randint(1, 10))
 
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
+      cur.execute("start transaction")
+      insert = """select codigo from municipio"""
+      cur.execute(insert)
+      result = cur.fetchall()
+      cur.execute("commit")
+      lstcodemun = []
+      for i in range(len(result)):
+        lstcodemun.append(result[i][0])
 
-  bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
-  mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
-  est = lstcodeest[randint(0, len(lstcodeest)- 1)]
+      cur.execute("start transaction")
+      insert = """select codigo from bairro"""
+      cur.execute(insert)
+      result2 = cur.fetchall()
+      cur.execute("commit")
+      lstcodebai = []
+      for i in range(len(result2)):
+        lstcodebai.append(result2[i][0])
 
-  data  = (code, prefix, nom, num, comp, bai, est, mun)
-  cur.execute("start transaction")
-  insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit") 
-  #print(data)
+      cur.execute("start transaction")
+      insert = """select codigo from estado"""
+      cur.execute(insert)
+      result3 = cur.fetchall()
+      cur.execute("commit")
+      lstcodeest = []
+      for i in range(len(result3)):
+        lstcodeest.append(result3[i][0])
 
-fake = Factory.create('pt_BR')
-fake.building_number()
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
 
-cur.execute("start transaction")
-insert = """select codigo from usuario"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lstu = []
-for j in range(len(result)):
-    lstu.append(result[j][0])
-    
-  
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result2)):
-    lstr.append(result2[j][0])
+      bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
+      mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
+      est = lstcodeest[randint(0, len(lstcodeest)- 1)]
 
-for i in range(100):
-  data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
-  cur.execute("start transaction")
-  insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+      data  = (code, prefix, nom, num, comp, bai, est, mun)
+      cur.execute("start transaction")
+      insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit") 
+      #print(data)
 
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result2)):
-    lstr.append(result2[j][0])
-com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
+    fake = Factory.create('pt_BR')
+    fake.building_number()
 
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
-  cur.execute("start transaction")
-  insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
-
-fake = Factory.create()
+    cur.execute("start transaction")
+    insert = """select codigo from usuario"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstu = []
+    for j in range(len(result)):
+        lstu.append(result[j][0])
 
 
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result)):
-    lstr.append(result[j][0])
-    
-cur.execute("start transaction")
-insert = """select codigo from comodo"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstc = []
-for j in range(len(result2)):
-    lstc.append(result2[j][0])
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
-  cur.execute("start transaction")
-  insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result2)):
+        lstr.append(result2[j][0])
 
-from random import uniform
+    for i in range(100):
+      data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
+      cur.execute("start transaction")
+      insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from sensor"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lsts = []
-for j in range(len(result)):
-    lsts.append(result[j][0])
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  date = str(fake.date_time(tzinfo=None, end_datetime=None))
-  val = round(uniform(0.0, 100.0), 2)
-  
-  data = (code, date, val, lsts[randint(0, len(lsts) -1)])
-  cur.execute("start transaction")
-  insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result2)):
+        lstr.append(result2[j][0])
+    com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
 
-cur.execute("commit")
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
+      cur.execute("start transaction")
+      insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    fake = Factory.create()
+
+
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result)):
+        lstr.append(result[j][0])
+
+    cur.execute("start transaction")
+    insert = """select codigo from comodo"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstc = []
+    for j in range(len(result2)):
+        lstc.append(result2[j][0])
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
+      cur.execute("start transaction")
+      insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    from random import uniform
+
+    cur.execute("start transaction")
+    insert = """select codigo from sensor"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lsts = []
+    for j in range(len(result)):
+        lsts.append(result[j][0])
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      date = str(fake.date_time(tzinfo=None, end_datetime=None))
+      val = round(uniform(0.0, 100.0), 2)
+
+      data = (code, date, val, lsts[randint(0, len(lsts) -1)])
+      cur.execute("start transaction")
+      insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    cur.execute("commit")
 
         
 #### 8.3 INCLUSÃO DO SCRIPT PARA EXCLUSÃO DE TABELAS EXISTENTES, CRIAÇÃO DE TABELA NOVAS E INSERÇÃO DOS DADOS
@@ -1112,259 +1112,259 @@ cur.execute("commit")
         REFERENCES RESIDENCIA (codigo)
         ON DELETE RESTRICT;
 
-fake_person_names = Person('pt')
-for i in range(20):
-  cpf = ""
-  for j in range(11):
-    cpf += str(randint(0, 9))
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  name = fake_person_names.full_name()
-  data = (code, name, cpf)
-  
-  cur.execute("start transaction")
-  insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fake_person_names = Person('pt')
+    for i in range(20):
+      cpf = ""
+      for j in range(11):
+        cpf += str(randint(0, 9))
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      name = fake_person_names.full_name()
+      data = (code, name, cpf)
 
-fakes = Factory.create('pt_BR')
-code = ""
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  city = fakes.city()
-  data = (code, city)
-  cur.execute("start transaction")
-  insert = """insert into municipio (codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+      cur.execute("start transaction")
+      insert = """insert into usuario (codigo, nome, cpf) values (%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-fakes = Factory.create('pt_BR')
-ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
-      'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, ba[i])
-  cur.execute("start transaction")
-  insert = """insert into bairro (codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fakes = Factory.create('pt_BR')
+    code = ""
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      city = fakes.city()
+      data = (code, city)
+      cur.execute("start transaction")
+      insert = """insert into municipio (codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-fakes = Factory.create('pt_BR')
-es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
-      'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, es[i])
-  cur.execute("start transaction")
-  insert = """insert into estado(codigo, nome) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    fakes = Factory.create('pt_BR')
+    ba = ['Morada laranjeiras','Laranjeiras','Colina Laranjeiras','Valparaíso','Feu Rosa', 'Nova Carapina', 'Praia da Costa', 'Itaparica', 'Itapuã', 'Novo México', 'Jardim Colorado',
+          'Jardim Camburi', 'Jardim da Penha', 'Praia do Canto', 'Mata da Praia', 'Padre Gabriel','Bairro República','Taquara II','Flechal II','Flechal I']
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, ba[i])
+      cur.execute("start transaction")
+      insert = """insert into bairro (codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from municipio"""
-cur.execute(insert, data)
-result = cur.fetchall()
-cur.execute("commit")
-lstcodemun = []
-for i in range(len(result)):
-  lstcodemun.append(result[i][0])
+    fakes = Factory.create('pt_BR')
+    es = ['Rio de Janeiro', 'São Paulo', 'Espírito Santo', 'Bahia', 'Santa Catarina', 'Minas Gerais', 'Acre', 'Amazonas', 'Roraima', 'Pernambuco', 'Ceará',
+          'Rondônia','Pará', 'Mato Grosso', 'Goiás', 'Paraná','Alagoas','Paraíba','Piauí','Maranhão']
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, es[i])
+      cur.execute("start transaction")
+      insert = """insert into estado(codigo, nome) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from bairro"""
-cur.execute(insert, data)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstcodebai = []
-for i in range(len(result2)):
-  lstcodebai.append(result2[i][0])
-  
-cur.execute("start transaction")
-insert = """select codigo from estado"""
-cur.execute(insert, data)
-result3 = cur.fetchall()
-cur.execute("commit")
-lstcodeest = []
-for i in range(len(result3)):
-  lstcodeest.append(result3[i][0])
-  
-for i in range(20):
-  print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
+    cur.execute("start transaction")
+    insert = """select codigo from municipio"""
+    cur.execute(insert, data)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstcodemun = []
+    for i in range(len(result)):
+      lstcodemun.append(result[i][0])
 
-fake = Factory.create('pt_BR')
-for k in range(20):
-  r = fake.street_name()
-  lstr = r.split(" ")
-  prefix = ""
-  for i in range(len(lstr)):
-    if i == 0:
-      if lstr[i][0:3] != "Rua":
-        prefix = lstr[i][0:2]
-      else: prefix = lstr[i][0:1]
-  nom = ""
-  for i in range(1,len(lstr)):
-    nom += lstr[i] + " "
-  num = fake.building_number()
-  rnd = randint(0, 2)
-  comp = ""
-  if rnd == 0:
-    comp = None
-  elif rnd ==1:
-    comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
-  elif rnd == 2:
-    comp = "Lote " + str(randint(1, 10))
+    cur.execute("start transaction")
+    insert = """select codigo from bairro"""
+    cur.execute(insert, data)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstcodebai = []
+    for i in range(len(result2)):
+      lstcodebai.append(result2[i][0])
 
-  cur.execute("start transaction")
-  insert = """select codigo from municipio"""
-  cur.execute(insert)
-  result = cur.fetchall()
-  cur.execute("commit")
-  lstcodemun = []
-  for i in range(len(result)):
-    lstcodemun.append(result[i][0])
+    cur.execute("start transaction")
+    insert = """select codigo from estado"""
+    cur.execute(insert, data)
+    result3 = cur.fetchall()
+    cur.execute("commit")
+    lstcodeest = []
+    for i in range(len(result3)):
+      lstcodeest.append(result3[i][0])
 
-  cur.execute("start transaction")
-  insert = """select codigo from bairro"""
-  cur.execute(insert)
-  result2 = cur.fetchall()
-  cur.execute("commit")
-  lstcodebai = []
-  for i in range(len(result2)):
-    lstcodebai.append(result2[i][0])
+    for i in range(20):
+      print(lstcodebai[randint(0, len(lstcodebai)- 1)], lstcodemun[randint(0, len(lstcodemun)- 1)], lstcodeest[randint(0, len(lstcodeest)- 1)])
 
-  cur.execute("start transaction")
-  insert = """select codigo from estado"""
-  cur.execute(insert)
-  result3 = cur.fetchall()
-  cur.execute("commit")
-  lstcodeest = []
-  for i in range(len(result3)):
-    lstcodeest.append(result3[i][0])
+    fake = Factory.create('pt_BR')
+    for k in range(20):
+      r = fake.street_name()
+      lstr = r.split(" ")
+      prefix = ""
+      for i in range(len(lstr)):
+        if i == 0:
+          if lstr[i][0:3] != "Rua":
+            prefix = lstr[i][0:2]
+          else: prefix = lstr[i][0:1]
+      nom = ""
+      for i in range(1,len(lstr)):
+        nom += lstr[i] + " "
+      num = fake.building_number()
+      rnd = randint(0, 2)
+      comp = ""
+      if rnd == 0:
+        comp = None
+      elif rnd ==1:
+        comp = "Apartamento " + str(randint(0, 1)) + str(randint(0, 9)) + "0" + str(randint(1, 4))
+      elif rnd == 2:
+        comp = "Lote " + str(randint(1, 10))
 
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
+      cur.execute("start transaction")
+      insert = """select codigo from municipio"""
+      cur.execute(insert)
+      result = cur.fetchall()
+      cur.execute("commit")
+      lstcodemun = []
+      for i in range(len(result)):
+        lstcodemun.append(result[i][0])
 
-  bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
-  mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
-  est = lstcodeest[randint(0, len(lstcodeest)- 1)]
+      cur.execute("start transaction")
+      insert = """select codigo from bairro"""
+      cur.execute(insert)
+      result2 = cur.fetchall()
+      cur.execute("commit")
+      lstcodebai = []
+      for i in range(len(result2)):
+        lstcodebai.append(result2[i][0])
 
-  data  = (code, prefix, nom, num, comp, bai, est, mun)
-  cur.execute("start transaction")
-  insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit") 
-  #print(data)
+      cur.execute("start transaction")
+      insert = """select codigo from estado"""
+      cur.execute(insert)
+      result3 = cur.fetchall()
+      cur.execute("commit")
+      lstcodeest = []
+      for i in range(len(result3)):
+        lstcodeest.append(result3[i][0])
 
-fake = Factory.create('pt_BR')
-fake.building_number()
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
 
-cur.execute("start transaction")
-insert = """select codigo from usuario"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lstu = []
-for j in range(len(result)):
-    lstu.append(result[j][0])
-    
-  
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result2)):
-    lstr.append(result2[j][0])
+      bai = lstcodebai[randint(0, len(lstcodebai)- 1)]
+      mun = lstcodemun[randint(0, len(lstcodemun)- 1)]
+      est = lstcodeest[randint(0, len(lstcodeest)- 1)]
 
-for i in range(100):
-  data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
-  cur.execute("start transaction")
-  insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+      data  = (code, prefix, nom, num, comp, bai, est, mun)
+      cur.execute("start transaction")
+      insert = """insert into residencia(codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo) values (%s,%s,%s,%s,%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit") 
+      #print(data)
 
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result2)):
-    lstr.append(result2[j][0])
-com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
+    fake = Factory.create('pt_BR')
+    fake.building_number()
 
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
-  cur.execute("start transaction")
-  insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
-
-fake = Factory.create()
+    cur.execute("start transaction")
+    insert = """select codigo from usuario"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstu = []
+    for j in range(len(result)):
+        lstu.append(result[j][0])
 
 
-cur.execute("start transaction")
-insert = """select codigo from residencia"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lstr = []
-for j in range(len(result)):
-    lstr.append(result[j][0])
-    
-cur.execute("start transaction")
-insert = """select codigo from comodo"""
-cur.execute(insert)
-result2 = cur.fetchall()
-cur.execute("commit")
-lstc = []
-for j in range(len(result2)):
-    lstc.append(result2[j][0])
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
-  cur.execute("start transaction")
-  insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result2)):
+        lstr.append(result2[j][0])
 
-from random import uniform
+    for i in range(100):
+      data = (lstu[randint(0, len(lstu)-1)], lstr[randint(0, len(lstr)-1)])
+      cur.execute("start transaction")
+      insert = """insert into usuario_residencia(fk_usuario_codigo, fk_residencia_codigo) values (%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
 
-cur.execute("start transaction")
-insert = """select codigo from sensor"""
-cur.execute(insert)
-result = cur.fetchall()
-cur.execute("commit")
-lsts = []
-for j in range(len(result)):
-    lsts.append(result[j][0])
-for i in range(20):
-  code = ""
-  for j in range(7):
-    code += str(randint(0, 9))
-  date = str(fake.date_time(tzinfo=None, end_datetime=None))
-  val = round(uniform(0.0, 100.0), 2)
-  
-  data = (code, date, val, lsts[randint(0, len(lsts) -1)])
-  cur.execute("start transaction")
-  insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
-  cur.execute(insert, data)
-  cur.execute("commit")
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result2)):
+        lstr.append(result2[j][0])
+    com = ['lavabo','banheiro','quintal','cozinha','lavanderia','garagem']
 
-cur.execute("commit")
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, com[randint(0, len(com)-1)], lstr[randint(0, len(lstr) - 1)])
+      cur.execute("start transaction")
+      insert = """insert into comodo(codigo, nome_complemento, fk_residencia_codigo) values (%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    fake = Factory.create()
+
+
+    cur.execute("start transaction")
+    insert = """select codigo from residencia"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lstr = []
+    for j in range(len(result)):
+        lstr.append(result[j][0])
+
+    cur.execute("start transaction")
+    insert = """select codigo from comodo"""
+    cur.execute(insert)
+    result2 = cur.fetchall()
+    cur.execute("commit")
+    lstc = []
+    for j in range(len(result2)):
+        lstc.append(result2[j][0])
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      data = (code, float(fake.latitude()), float(fake.longitude()), lstr[randint(0, len(lstr)-1)], lstc[randint(0, len(lstc)-1)])
+      cur.execute("start transaction")
+      insert = """insert into sensor(codigo, latitude, longitude, fk_residencia_codigo, fk_comodo_codigo) values (%s,%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    from random import uniform
+
+    cur.execute("start transaction")
+    insert = """select codigo from sensor"""
+    cur.execute(insert)
+    result = cur.fetchall()
+    cur.execute("commit")
+    lsts = []
+    for j in range(len(result)):
+        lsts.append(result[j][0])
+    for i in range(20):
+      code = ""
+      for j in range(7):
+        code += str(randint(0, 9))
+      date = str(fake.date_time(tzinfo=None, end_datetime=None))
+      val = round(uniform(0.0, 100.0), 2)
+
+      data = (code, date, val, lsts[randint(0, len(lsts) -1)])
+      cur.execute("start transaction")
+      insert = """insert into dado(codigo, data_hora, valor, fk_sensor_codigo) values (%s,%s,%s,%s)"""
+      cur.execute(insert, data)
+      cur.execute("commit")
+
+    cur.execute("commit")
 
 ## Marco de Entrega 08 em: (29/05/2019)<br>
 
