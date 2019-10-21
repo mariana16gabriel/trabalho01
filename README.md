@@ -1383,10 +1383,29 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabelas_Hydro_Economi
 
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
+    1- select * from dado where valor > 50;
+    2- select * from residencia where fk_estado_codigo = '1622796';
+    3- select fk_residencia_codigo from usuario_residencia where fk_usuario_codigo = '3471000';
+    4- select codigo as codigo_sensor from sensor where fk_comodo_codigo = '0160177';
+ 
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
     a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
+    1- select * from sensor where latitude >-10 and longitude <40;
+    2- select * from residencia where complemento is not null and fk_bairro_codigo = '0319033'
+    3- select * from dado where valor > 60 or valor > 40;
+    4- select * from comodo where nome_complemento = 'cozinha' and fk_residencia_codigo = '6208284'
+    5- select * from residencia where tipo_logradouro = 'Fa' and complemento is null;
+    
     b) Criar no mínimo 3 consultas com operadores aritméticos 
+    1- select * from sensor where latitude/2 > 10;  
+    2- select * from sensor where longitude+100 < 1; 
+    3- select * from residencia where numero+10 > 5;
+    
     c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
+    1- select nome_complemento as nome_comodo from comodo;
+    2- select valor as litros from dado;
+    3- 
+    
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
     b) Criar uma consulta para cada tipo de função data apresentada.
