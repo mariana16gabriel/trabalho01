@@ -1475,8 +1475,65 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabelas_Hydro_Economi
 
 
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
+    1-
+    select u.nome as nome_usuario, avg(d.valor) from usuario u inner join usuario_residencia ur
+    on(u.codigo = ur.fk_usuario_codigo)
+    inner join residencia r on(ur.fk_residencia_codigo = r.codigo)
+    inner join sensor s on(s.fk_residencia_codigo = r.codigo)
+    inner join dado d on(d.fk_sensor_codigo = s.codigo)
+    group by u.nome;
+
+    2-
+    select m.nome as nome_municipio, sum(d.valor) as total_consumo from municipio m
+    inner join residencia r on (r.fk_municipio_codigo = m.codigo)
+    inner join sensor s on (s.fk_residencia_codigo = r.codigo)
+    inner join dado d on (d.fk_sensor_codigo = s.codigo)
+    group by m.nome;
+
+    3-
+    select r.numero as num_residencia, d.data_hora as hora_maior_consumo from residencia r
+    inner join sensor s on(s.fk_residencia_codigo= r.codigo)
+    inner join dado d on(d.fk_sensor_codigo = s.codigo)
+    group by r.numero, d.data_hora
+    order by sum(d.valor) desc;
+
+    4-
+    select e.nome, max(d.valor) - min(d.valor) as variacao_consumo from estado e
+    inner join residencia r on (e.codigo = r.fk_estado_codigo)
+    inner join sensor s on(s.fk_residencia_codigo = r.codigo)
+    inner join dado d on(d.fk_sensor_codigo = s.codigo)
+    group by e.nome;
+
+    5-
+    select b.nome as nome_bairro, count(u.codigo) as total_usuarios from usuario u
+    inner join usuario_residencia ur on(u.codigo = ur.fk_usuario_codigo)
+    inner join residencia r on(ur.fk_residencia_codigo = r.codigo)
+    inner join bairro b on (b.codigo = r.fk_bairro_codigo)
+    group by b.nome;
+
+    6-
+    select r.numero as numero_residencia, count(s.codigo) as total_sensores from residencia r
+    inner join comodo c on(c.fk_residencia_codigo = r.codigo)
+    inner join sensor s on(s.fk_comodo_codigo = c.codigo)
+    group by r.numero; 
 
 #### 9.8	CONSULTAS COM LEFT E RIGHT JOIN (Mínimo 4)<br>
+    1-
+    select u.nome as nome_usuario, r.numero as numero_residencia from usuario u
+    left outer join usuario_residencia ur on (u.codigo = ur.fk_usuario_codigo)
+    left outer join residencia r on (ur.fk_residencia_codigo = r.codigo);
+
+    2-
+    select s.codigo as codigo_sensor, d.codigo as codigo_dado from sensor s
+    left outer join dado d on (s.codigo = d.fk_sensor_codigo);
+
+    3-
+    select s.codigo as codigo_sensor, c.codigo as codigo_comodo from sensor s
+    right outer join comodo c on (s.fk_comodo_codigo = c.codigo);
+
+    4-
+    select r.codigo as codigo_residencia, b.nome as nome_bairro from residencia r
+    right outer join bairro b on (r.fk_bairro_codigo = b.codigo);
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
         a) Uma junção que envolva Self Join 
         b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
