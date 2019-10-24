@@ -1429,8 +1429,47 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabelas_Hydro_Economi
 
 #### 9.6	CONSULTAS COM JUNÇÃO E ORDENAÇÃO (Mínimo 6)<br>
         a) Uma junção que envolva todas as tabelas possuindo no mínimo 3 registros no resultado
+        1- 
+         select * from usuario u inner join usuario_residencia ur
+         on(u.codigo = ur.fk_usuario_codigo)
+         inner join residencia r on(ur.fk_residencia_codigo = r.codigo)
+         inner join bairro b on (b.codigo = r.fk_bairro_codigo)
+         inner join estado e on (e.codigo = r.fk_estado_codigo)
+         inner join municipio m on (m.codigo = r.fk_municipio_codigo)
+         inner join comodo c on(c.fk_residencia_codigo = r.codigo)
+         inner join sensor s on(s.fk_comodo_codigo = c.codigo)
+         inner join residencia altr on(s.fk_residencia_codigo = altr.codigo)
+         inner join dado d on(d.fk_sensor_codigo = s.codigo);
+         
         b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
-        
+         2- 
+         select * from usuario u inner join usuario_residencia ur
+         on(u.codigo = ur.fk_usuario_codigo)
+         inner join residencia r on(ur.fk_residencia_codigo = r.codigo)
+         inner join sensor s on(s.fk_residencia_codigo = r.codigo)
+         inner join dado d on(d.fk_sensor_codigo = s.codigo)
+
+         3-
+         select * from usuario u inner join usuario_residencia ur
+         on(u.codigo = ur.fk_usuario_codigo)
+         inner join residencia r on(ur.fk_residencia_codigo = r.codigo)
+         inner join bairro b on (b.codigo = r.fk_bairro_codigo)
+         inner join estado e on (e.codigo = r.fk_estado_codigo)
+         inner join municipio m on (m.codigo = r.fk_municipio_codigo)
+         
+         4-
+         select * from residencia r inner join comodo c 
+         on(c.fk_residencia_codigo = r.codigo)
+         inner join sensor s on(s.fk_comodo_codigo = c.codigo)
+         
+         5-
+         select * from sensor s inner join dado d 
+         on(s.codigo = d.fk_sensor_codigo);
+         
+         6-
+         select * from residencia r inner join comodo c
+         on(r.codigo = c.fk_residencia_codigo)
+         inner join sensor s on(c.codigo = s.fk_comodo_codigo);
 
 ### ATUALIZAÇÃO DA DOCUMENTAÇÃO DOS SLIDES PARA APRESENTAÇAO SEMESTRAL (Mínimo 6 e Máximo 10)<br>
 
