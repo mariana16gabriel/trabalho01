@@ -1404,15 +1404,27 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabelas_Hydro_Economi
     c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
     1- select nome_complemento as nome_comodo from comodo;
     2- select valor as litros from dado;
-    3- 
+    3- select (tipo_logradouro,nome_logradouro,numero,complemento) as endereco from residencia;
     
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
+    1- select * from comodo where nome_complemento like '%banheiro%';
+    2- select nome as Usuarios from usuario where nome ilike 'c%';
+    3- select * from usuario where nome like '%s';
+    4- select * from residencia where nome_logradouro ilike 'de%' and numero>5;
+    5- select * from estado where nome ilike 'r%';
     b) Criar uma consulta para cada tipo de função data apresentada.
+    
 
 
     
 #### 9.5	ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
+    1- delete from residencia where complemento is null;
+    2- delete from sensor where latitude>100 and longitude<100;
+    3- update usuario set nome='Mariana Tassan' where cpf='20375978179';
+    4- update residencia set tipo_logradouro='R' where numero=70;
+    5- delete from usuario where nome ilike 'c%';
+    6- update dado set data_hora='2019-11-07 19:45:55' where valor=64.8;
 
 
 #### 9.6	CONSULTAS COM JUNÇÃO E ORDENAÇÃO (Mínimo 6)<br>
