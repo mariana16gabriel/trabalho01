@@ -1414,10 +1414,15 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabelas_Hydro_Economi
     4- select * from residencia where nome_logradouro ilike 'de%' and numero>5;
     5- select * from estado where nome ilike 'r%';
     b) Criar uma consulta para cada tipo de função data apresentada.
-    
+    1- select codigo as codigo_dado, current_date - data_hora as dias_desde_coleta from dado;
+    2- select codigo as codigo_dado, age(current_date, data_hora) as tempo_desde_coleta from dado;
+    3- select codigo as codigo_dado, date_part('year', age(current_date, data_hora)) as anos_desde_coleta from dado;
+    4- select codigo as codigo_dado, extract('month' from age(current_date,data_hora)) as meses_desde_coleta from dado;
+    5- select codigo as codigo_dado, now() - data_hora as tempo_exato_desde_coleta from dado;
+    6- select codigo as codigo_dado, extract('hour' from current_time) - extract('hour' from data_hora) as horas_desde_coleta from dado;
+    7- select codigo as codigo_dado, extract('day' from now()) - extract('day' from data_hora) as dias_desde_coleta from dado;
 
-
-    
+  
 #### 9.5	ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
     1- delete from residencia where complemento is null;
     2- delete from sensor where latitude>100 and longitude<100;
