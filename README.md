@@ -1542,14 +1542,57 @@ https://github.com/mariana16gabriel/trabalho01/blob/master/tabelas_Hydro_Economi
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
         a) Uma junção que envolva Self Join 
         b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
+        create view tempo_coleta_dado as select codigo as codigo_dado, age(current_date, data_hora) as tempo_desde_coleta from dado;
+
 #### 9.10	SUBCONSULTAS (Mínimo 3)<br>
+        1- select * from dado where data_hora in (select data_hora from dado where date_part('year',age(current_date,data_hora))<15);
+
 
 #### 9.11	LISTA DE CODIGOS DAS FUNÇÕES E TRIGGERS<br>
         Detalhamento sobre funcionalidade de cada código.
         a) Objetivo
         b) Código do objeto (função/trigger)
+        cur.execute("""
+        CREATE OR REPLACE FUNCTION insere_muda_residencia(cod_user VARCHAR(8), cod_nov_res VARCHAR(8), nov_tip_log VARCHAR(20), nov_nom_log VARCHAR(50),
+         nov_num int, nov_comp VARCHAR(50), nov_cod_bai VARCHAR(8) , nov_cod_est VARCHAR(8), nov_cod_mun VARCHAR(8), nov_cod VARCHAR(8), cod_ant_res VARCHAR(8), 
+         bol BOOLEAN)
+          RETURNS trigger  AS 
+        '
+        BEGIN
+          INSERT INTO residencia (codigo, tipo_logradouro, nome_logradouro, numero, complemento, fk_bairro_codigo, fk_estado_codigo, fk_municipio_codigo)
+          VALUES (cod_nov_res, nov_tip_log, nov_nom_log, nov_num, nov_comp, nov_cod_bai, nov_cod_est, nov_cod_mun);
+          INSERT INTO usuario_residencia (fk_usuario_codigo, fk_residencia_codigo) VALUES (cod_user, cod_nov_res);
+          IF bol == True THEN
+            DELETE FROM residencia WHERE residencia = cod_ant_res;
+            DELETE FROM usuario_residencia WHERE fk_usuario_codigo = cod_user AND fk_residencia_codigo = cod_ant_res;
+          END IF;
+
+        END;
+        '
+        LANGUAGE plpgsql;
+
+        CREATE TRIGGER verifica_mudanca
+          BEFORE INSERT
+          ON residencia
+          EXECUTE PROCEDURE muda_residencia()
+
+        """)
         c) exemplo de dados para aplicação
         d) resultados em forma de tabela/imagem
+        1º gráfico- 
+        teste = pd.read_sql_query("""
+                            select m.nome as municipios, count(u.nome) as numero_usuarios from municipio m inner join residencia r on (m.codigo = r.fk_municipio_codigo) inner join usuario_residencia ur on (r.codigo = ur.fk_residencia_codigo) inner join usuario u on (ur.fk_usuario_codigo = u.codigo) group by m.nome order by count(u.nome) desc;
+                            """,conn)
+                            
+        sns.barplot(y='municipios',x='numero_usuarios',data=teste).set_title("Quantidade de usuários por município")
+        
+        2º gráfico-
+        teste2 = pd.read_sql_query("""
+                            select bairro.nome as bairro, avg(dado.valor) as media from bairro inner join residencia on (bairro.codigo = residencia.fk_bairro_codigo) inner join sensor on (residencia.codigo = sensor.fk_residencia_codigo) inner join dado on (sensor.codigo = dado.fk_sensor_codigo) group by bairro.nome limit 5;
+                            """,conn)
+       
+       sns.lineplot(teste2.bairro, teste2.media).set_title("Média de consumo por bairro")
+
 <br>
 
 
@@ -1578,6 +1621,21 @@ Data de Entrega: (Data a ser definida)
 
 #### 9.14	APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE<br>
     a) Lista de índices, tipos de índices com explicação de porque foram implementados nas consultas 
+    cur.execute("create table if not exists dado_com_indice as select * from dado");
+    cur.execute("CREATE INDEX datas_posteriores ON dado_com_indice USING BTREE (data_hora);")
+    cur.execute("""
+    explain analyse select * 
+    from dado
+    inner join sensor
+    on (dado.fk_sensor_codigo=sensor.codigo)
+    inner join residencia
+    on (sensor.fk_residencia_codigo=residencia.codigo)
+    where data_hora>('1989-10-22')
+    """);
+    rows = cur.fetchall()
+    for i in rows:
+      print(i)
+    cur.execute("commit")
     b) Performance esperada VS Resultados obtidos
     c) Tabela de resultados comparando velocidades antes e depois da aplicação dos índices (constando velocidade esperada com planejamento, sem indice e com índice Vs velocidade de execucao real com índice e sem índice).
     d) Escolher as consultas mais complexas para serem analisadas (consultas com menos de 2 joins não serão aceitas)
